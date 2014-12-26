@@ -1,0 +1,70 @@
+<anf>
+  <!-- bloco de configuracoes globais -->
+  <!-- a declaracao dos componentes deste bloco e' obrigatoria -->
+  <globals>
+    <!-- Parametros de desenho -->
+    <!-- Valores para mode: "fill" , "line", "point" -->
+    <!-- Valores para shading: "flat", "gouraud" ) -->
+    <drawing mode="fill" shading="gouraud" background="0. 0. 0. 1." />
+    <!-- Parametros de culling -->
+    <!-- Valores para cullface: "none", "back" , "front" ou "both" -->
+    <!-- Valores para cullorder : "ccw" ou "cw" -->
+    <culling face="back" order="ccw"/>
+    <!-- Parametros de iluminacao; seguem os parametros do OpenGL  -->
+    <lighting doublesided="false" local="true" enabled="true" ambient=".5 .5 .5 1." />
+  </globals>
+  <!-- bloco de camaras: o atributo "initial" identifica a camara/ponto de vista inicial, que tem de existir -->
+  <cameras initial="Longe">
+    <!-- tem de existir, pelo menos uma camara dos tipos seguintes (perspective ou ortho) -->
+    <!-- no caso da camara ortho, o atributo "direction" define o eixo segundo o qual se efetua a projecao -->
+    <ortho id="Ortogonal Z" direction="z" near="-30" far="500" left="-15" right="25" top="25" bottom="-5" />
+  </cameras>
+  <animations>
+    <animation id="translate" span="5" type="linear">
+      <controlpoint xx="0." yy="0." zz="0." />
+      <controlpoint xx="5." yy="0." zz="0." />
+      <controlpoint xx="5." yy="5." zz="0." />
+      <controlpoint xx="5." yy="5." zz="3." />
+      <controlpoint xx="5." yy="7." zz="3." />
+      <controlpoint xx="5." yy="7." zz="10." />
+    </animation>
+    <animation id="rotate" span="0.1" type="circular" center="1. 0. 3." radius="0." startang="20." rotang="20." />
+  </animations>
+  <!-- bloco de luzes -->
+  <lights>
+    <!-- Deve existir pelo menos uma luz declarada -->
+    <!-- Atributo "marker" indica se deve ou nao desenhar-se uma esfera representativa -->
+    <light id="topLight" type="omni" enabled="true" marker="true" pos="15. 8. 13.">
+      <component type="ambient" value="0.2 0.2 0.2 1." />
+      <component type="diffuse" value="0.7 0.7 0.9 0.4" />
+      <component type="specular" value="0.4 0.4 0.8 0.5" />
+    </light>
+  </lights>
+  <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas -->
+  <!--   ver topico 'Notas finais' no enunciado sobre os parametros texlength_... -->
+  <textures>
+    <texture id="nuvem" file="../res/cloud.png" texlength_s="30." texlength_t="20." />
+  </textures>
+  <!-- bloco de materiais; -->
+  <appearances>
+    <!-- deve existir um ou mais blocos "appearance" -->
+    <!-- IMPORTANTE: -->
+    <!--   textureref e opcional, a utilizar caso haja textura associada a esta aparencia -->
+    <appearance id="nuvens" shininess=".3" textureref="nuvem">
+      <component type="ambient" value=".5 .5 .5 1." />
+      <component type="diffuse" value="1. 1. 1. 1." />
+      <component type="specular" value="0. 0. 0. 0." />
+    </appearance>
+  </appearances>
+  <!-- bloco do grafo; "rootid" identifica o no de raiz -->
+  <graph rootid="root">
+    <node id="root">
+      <transforms></transforms>
+      <appearanceref id="nuvens" />
+      <primitives>
+      </primitives>
+      <descendants>
+      </descendants>
+    </node>
+  </graph>
+</anf>

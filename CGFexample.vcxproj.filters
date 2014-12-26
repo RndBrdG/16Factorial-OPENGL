@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Parser">
+      <UniqueIdentifier>{bbf23924-808b-436e-9f49-9ae28e9776ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Primitivas">
+      <UniqueIdentifier>{b59ce215-0768-416d-b2ec-ae378e5b849e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Primitivas">
+      <UniqueIdentifier>{1d9b118f-5b55-4008-bfce-4d4afcda210f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DemoScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\XMLScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Globals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TPinterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DemoShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parserAnimations.cpp">
+      <Filter>Source Files\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parserAppearances.cpp">
+      <Filter>Source Files\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parserCameras.cpp">
+      <Filter>Source Files\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parserGlobals.cpp">
+      <Filter>Source Files\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parserGraph.cpp">
+      <Filter>Source Files\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parserLights.cpp">
+      <Filter>Source Files\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\parserTextures.cpp">
+      <Filter>Source Files\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plane.cpp">
+      <Filter>Source Files\Primitivas</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Primitiva.cpp">
+      <Filter>Source Files\Primitivas</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Patch.cpp">
+      <Filter>Source Files\Primitivas</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Vehicle.cpp">
+      <Filter>Source Files\Primitivas</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Flag.cpp">
+      <Filter>Source Files\Primitivas</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Tabuleiro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PickInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\tinyxml.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\XMLScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DemoScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TPinterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DemoShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Primitiva.h">
+      <Filter>Header Files\Primitivas</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vehicle.h">
+      <Filter>Header Files\Primitivas</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Flag.h">
+      <Filter>Header Files\Primitivas</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Plane.h">
+      <Filter>Header Files\Primitivas</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Patch.h">
+      <Filter>Header Files\Primitivas</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Tabuleiro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PickInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\cloud.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cloud.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\face.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\wood.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\asas.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\cloth.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scene.anf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\wc.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\ceu.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\poste.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\flag.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\shader.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\shader.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>
