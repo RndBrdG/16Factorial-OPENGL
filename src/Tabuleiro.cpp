@@ -10,7 +10,7 @@ Tabuleiro::Tabuleiro(){
 		this->tabuleiro.push_back(aux);
 	}
 	
-	for (int i = 0; i < 2; i++){
+	for (int i = 0; i < 4; i++){
 		vector<PecaTabuleiro*> aux;
 		for (int i = 0; i < 4; i++){
 			PecaTabuleiro *a1 = new PecaTabuleiro();
@@ -53,17 +53,22 @@ void Tabuleiro::draw(){
 }
 
 void Tabuleiro::drawPecas(){
-	for (int r = 0; r < 2; r++)
+	for (int r = 0; r < 4; r++)
 	{
 		glPushMatrix();
 		if (r == 0)
+			glTranslatef(-10, 0, 0);
+		else if (r == 1)
 			glTranslatef(-5, 0, 0);
-		else glTranslatef(30, 0, 0);
+		else if (r == 2) 
+			glTranslatef(30, 0, 0);
+		else 
+			glTranslatef(35, 0, 0);
 		glLoadName(r+100);
 		for (int c = 0; c < 4; c++)
 		{
 			glPushMatrix();
-			glTranslatef(0, (c + 1) * 5, 0);
+			glTranslatef(0, c * 5, 0);
 			//glRotatef(90, 0, 1, 0);
 			glPushName(c);
 			this->pecas_por_jogar[r][c]->draw();

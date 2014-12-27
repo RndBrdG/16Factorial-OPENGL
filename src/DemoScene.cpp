@@ -104,6 +104,7 @@ void DemoScene::display() {
 	for (unsigned int i = 0; i < camaras.size(); i++) {
 		if (camaras[i]->getId() == elementos.getCameraDefault()) {
 			id = i;
+			//camaras[i]->applyView();
 			break;
 		}
 	}

@@ -2,8 +2,10 @@
 #define CAMERA_H
 
 #include "CGFcamera.h"
+#include "CGFapplication.h"
+#include <GL/glut.h>
 
-class Camera {
+class Camera: public CGFcamera{
 	char* id;
 	char* type;
 	char* direction;
@@ -31,6 +33,8 @@ public:
 	float getRight();
 	float getBottom();
 	float getTop();
+	virtual void applyView();
+	virtual void updateProjectionMatrix(int width, int height);
 };
 
 #endif

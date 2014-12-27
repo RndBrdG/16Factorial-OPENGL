@@ -90,3 +90,32 @@ float Camera::getBottom(){
 float Camera::getTop(){
 	return top;
 }
+
+void Camera::updateProjectionMatrix(int width, int height){
+	if (type == "ORTHO"){
+		float aspect = (float) width / (float) height;
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(left, right, bottom, top, near, far);
+	}
+	else{
+		float aspect = (float) width / (float) height;
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		gluPerspective(angle, CGFapplication::xy_aspect, near, far);
+	}
+}
+
+void Camera::applyView(){
+	if (type == 0){
+		if (direction == "x")
+			gluLookAt(1, 0, 0, 0, 0, 0, 0, 1, 0);
+		else if (direction == "y")
+			gluLookAt(0, 1, 0, 0, 0, 0, 0, 0, -1);
+		else
+			gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
+	}
+	else{
+		gluLookAt(position[0], position[1], position[2], target[0], target[1], target[2], 0, 1, 0);
+	}
+}
