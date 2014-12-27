@@ -14,6 +14,13 @@ Camera::Camera(char *id, char *type, float near, float far, float angle, float t
 	this->posY = posY;
 	this->posZ = posZ;
 
+	this->position[0] = posX;
+	this->position[1] = posY;
+	this->position[2] = posZ;
+
+	this->target[0] = tarX;
+	this->target[1] = tarY;
+	this->target[2] = tarZ;
 }
 
 Camera::Camera(char *id, char *type, char* direction, float left, float right, float top, float bottom, float near, float far){

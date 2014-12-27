@@ -104,7 +104,7 @@ void DemoScene::display() {
 	for (unsigned int i = 0; i < camaras.size(); i++) {
 		if (camaras[i]->getId() == elementos.getCameraDefault()) {
 			id = i;
-			//camaras[i]->applyView();
+			CGFscene::activeCamera = camaras[i];
 			break;
 		}
 	}
@@ -124,7 +124,7 @@ void DemoScene::display() {
 	tabuleiro.draw();
 	tabuleiro.drawPecas();
 	// Draw axis
-	//axis.draw();
+	axis.draw();
 
 	// ---- END Background, camera and axis setup
 

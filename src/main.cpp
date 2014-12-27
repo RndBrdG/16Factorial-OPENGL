@@ -31,12 +31,11 @@ int main(int argc, char* argv[]) {
 		getline(std::cin, temp);
 		filename << temp << ".anf";
 		std::cout << endl;*/
+			app.setScene(new DemoScene(/*const_cast<char*>(filename.str().c_str())*/"../res/scene_tab.anf"));
+			app.setInterface(new TPinterface());
+			app.setInterface(new PickInterface());
 
-		app.setScene(new DemoScene(/*const_cast<char*>(filename.str().c_str())*/"../res/scene_tab.anf"));
-		app.setInterface(new TPinterface());
-		app.setInterface(new PickInterface());
-		
-		app.run();
+			app.run();
 	}
 	catch (GLexception& ex) {
 		cout << "Error: " << ex.what();
