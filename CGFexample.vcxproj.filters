@@ -96,6 +96,9 @@
     <ClCompile Include="src\PickInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\PecaTabuleiro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\tinyxml.h">
@@ -149,45 +152,27 @@
     <ClInclude Include="include\PickInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\PecaTabuleiro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\cloud.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\cloud.png">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\face.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\wood.png">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\asas.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\cloth.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\scene.anf">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\wc.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\ceu.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\poste.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\flag.jpg">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\shader.vert">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\shader.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\scene_tab.anf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\madeirapeca.jpg">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

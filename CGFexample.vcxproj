@@ -84,6 +84,7 @@
     <ClCompile Include="src\parserLights.cpp" />
     <ClCompile Include="src\parserTextures.cpp" />
     <ClCompile Include="src\Patch.cpp" />
+    <ClCompile Include="src\PecaTabuleiro.cpp" />
     <ClCompile Include="src\PickInterface.cpp" />
     <ClCompile Include="src\Plane.cpp" />
     <ClCompile Include="src\Primitiva.cpp" />
@@ -102,6 +103,7 @@
     <ClInclude Include="include\Graph.h" />
     <ClInclude Include="include\Light.h" />
     <ClInclude Include="include\Patch.h" />
+    <ClInclude Include="include\PecaTabuleiro.h" />
     <ClInclude Include="include\PickInterface.h" />
     <ClInclude Include="include\Plane.h" />
     <ClInclude Include="include\Primitiva.h" />
@@ -112,21 +114,14 @@
     <ClInclude Include="include\XMLScene.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\asas.jpg" />
-    <None Include="res\ceu.jpg" />
-    <None Include="res\cloth.jpg" />
-    <None Include="res\cloud.jpg" />
     <None Include="res\cloud.png" />
-    <None Include="res\face.jpg" />
-    <None Include="res\flag.jpg" />
-    <None Include="res\poste.jpg" />
+    <None Include="res\madeirapeca.jpg" />
     <None Include="res\scene.anf">
       <SubType>Designer</SubType>
     </None>
+    <None Include="res\scene_tab.anf" />
     <None Include="res\shader.frag" />
     <None Include="res\shader.vert" />
-    <None Include="res\wc.jpg" />
-    <None Include="res\wood.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
