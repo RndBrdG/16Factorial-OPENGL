@@ -21,6 +21,8 @@ Camera::Camera(char *id, char *type, float near, float far, float angle, float t
 	this->target[0] = tarX;
 	this->target[1] = tarY;
 	this->target[2] = tarZ;
+
+	this->translate(2, far);
 }
 
 Camera::Camera(char *id, char *type, char* direction, float left, float right, float top, float bottom, float near, float far){

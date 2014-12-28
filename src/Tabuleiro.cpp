@@ -9,6 +9,7 @@ Tabuleiro::Tabuleiro() {
 		vector<PecaTabuleiro*> aux;
 		for (int j = 0; j < 4; j++, x += 3) {
 			PecaTabuleiro *a1 = new PecaTabuleiro(x, y);
+			a1->setTabuleiroPrincipal(false);
 			aux.push_back(a1);
 		}
 		x = 0;
@@ -27,6 +28,7 @@ Tabuleiro::Tabuleiro() {
 	config[1].push_back(true); config[1].push_back(false); config[1].push_back(true);
 	config[2].push_back(true); config[2].push_back(true); config[2].push_back(true);
 	a1 = new PecaTabuleiro(x, y, config);
+	a1->setTabuleiroPrincipal(true);
 	aux.push_back(a1);
 	y -= 5;
 
@@ -189,6 +191,11 @@ Tabuleiro::Tabuleiro() {
 	aux.push_back(a1);
 
 	pecas_por_jogar.push_back(aux);
+
+	for (int j = 0; j < pecas_por_jogar.size(); j++){
+		for (int i = 0; i < aux.size(); i++)
+			pecas_por_jogar[j][i]->setTabuleiroPrincipal(true);
+	}
 }
 
 const vector<vector<PecaTabuleiro*>>& Tabuleiro::getTabuleiro() const {
@@ -250,17 +257,23 @@ void Tabuleiro::atualizarPecas() {
 	for (int i = 0; i < movimentos; i++) {
 		PecaTabuleiro* pecaAMover = getPecaFromCoords(cliques[i * 4 + 0], cliques[i * 4 + 1]);
 		PecaTabuleiro* pecaDestino = getPecaFromCoords(cliques[i * 4 + 2], cliques[i * 4 + 3]);
-		if (pecaAMover->getX() > pecaDestino->getX())
-			pecaAMover->getX() - pecaDestino->getX() >= .1 ? pecaAMover->setX(pecaAMover->getX() - .1) : pecaAMover->setX(pecaAMover->getX() - (pecaAMover->getX() - pecaDestino->getX()));
-		else if (pecaAMover->getX() < pecaDestino->getX())
-			pecaDestino->getX() - pecaAMover->getX() >= .1 ? pecaAMover->setX(pecaAMover->getX() + .1) : pecaAMover->setX(pecaAMover->getX() + (pecaDestino->getX() - pecaAMover->getX()));
-		else if (pecaAMover->getY() > pecaDestino->getY())
-			pecaAMover->getY() - pecaDestino->getY() >= .1 ? pecaAMover->setY(pecaAMover->getY() - .1) : pecaAMover->setY(pecaAMover->getY() - (pecaAMover->getY() - pecaDestino->getY()));
-		else if (pecaAMover->getY() < pecaDestino->getY())
-			pecaDestino->getY() - pecaAMover->getY() >= .1 ? pecaAMover->setY(pecaAMover->getY() + .1) : pecaAMover->setY(pecaAMover->getY() + (pecaDestino->getY() - pecaAMover->getY()));
+		if (pecaAMover->getTabuleiroPrincipal() != pecaDestino->getTabuleiroPrincipal()){
+			if (pecaAMover->getX() > pecaDestino->getX())
+				pecaAMover->getX() - pecaDestino->getX() >= .1 ? pecaAMover->setX(pecaAMover->getX() - .1) : pecaAMover->setX(pecaAMover->getX() - (pecaAMover->getX() - pecaDestino->getX()));
+			else if (pecaAMover->getX() < pecaDestino->getX())
+				pecaDestino->getX() - pecaAMover->getX() >= .1 ? pecaAMover->setX(pecaAMover->getX() + .1) : pecaAMover->setX(pecaAMover->getX() + (pecaDestino->getX() - pecaAMover->getX()));
+			else if (pecaAMover->getY() > pecaDestino->getY())
+				pecaAMover->getY() - pecaDestino->getY() >= .1 ? pecaAMover->setY(pecaAMover->getY() - .1) : pecaAMover->setY(pecaAMover->getY() - (pecaAMover->getY() - pecaDestino->getY()));
+			else if (pecaAMover->getY() < pecaDestino->getY())
+				pecaDestino->getY() - pecaAMover->getY() >= .1 ? pecaAMover->setY(pecaAMover->getY() + .1) : pecaAMover->setY(pecaAMover->getY() + (pecaDestino->getY() - pecaAMover->getY()));
+			else {
+				vector<int>(cliques.begin() + 4, cliques.end()).swap(cliques);
+				--movimentos;
+			}
+		}
 		else {
-			vector<int>(cliques.begin() + 4, cliques.end()).swap(cliques);
-			--movimentos;
+			printf("Hello\n");
+			cliques.clear();
 		}
 	}
 }

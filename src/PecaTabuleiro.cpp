@@ -36,6 +36,14 @@ void PecaTabuleiro::draw(float textS, float textT) {
 	draw();
 }
 
+void PecaTabuleiro::setTabuleiroPrincipal(bool value){
+	this->tabuleiroPrincipal = value;
+}
+
+bool PecaTabuleiro::getTabuleiroPrincipal(){
+	return this->tabuleiroPrincipal;
+}
+
 void PecaTabuleiro::draw() {
 	aparencia.apply();
 	forma.draw(3., 3.);

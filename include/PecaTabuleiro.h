@@ -11,13 +11,15 @@ class PecaTabuleiro: public Primitiva {
 private:
 	static CGFappearance aparencia;
 	static Rectangle forma;
+	bool tabuleiroPrincipal;
 	std::vector<std::vector<bool>> estrutura;
 	float x, y;
 public:
 	PecaTabuleiro(float, float, std::vector<std::vector<bool>> = std::vector<std::vector<bool>>());
 
 	const std::vector<std::vector<bool>>& getEstrutura() const;
-	void setX(float), setY(float);
+	void setX(float), setY(float), setTabuleiroPrincipal(bool);
+	bool getTabuleiroPrincipal();
 	float getX() const, getY() const;
 
 	void draw(float, float);
