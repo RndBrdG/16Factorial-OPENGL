@@ -9,16 +9,20 @@
 
 class PecaTabuleiro: public Primitiva {
 private:
-	static CGFappearance aparencia;
 	static Rectangle forma;
+	static CGFappearance aparencia;
 	bool tabuleiroPrincipal;
 	std::vector<std::vector<bool>> estrutura;
 	float x, y;
 public:
+	static CGFappearance &getAparencia() {
+		return aparencia;
+	};
 	PecaTabuleiro(float, float, std::vector<std::vector<bool>> = std::vector<std::vector<bool>>());
 
 	const std::vector<std::vector<bool>>& getEstrutura() const;
 	void setX(float), setY(float), setTabuleiroPrincipal(bool);
+
 	bool getTabuleiroPrincipal();
 	float getX() const, getY() const;
 

@@ -90,9 +90,6 @@
     <ClCompile Include="src\Tabuleiro.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\PickInterface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\PecaTabuleiro.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -159,9 +156,6 @@
       <Filter>Header Files\Primitivas</Filter>
     </ClInclude>
     <ClInclude Include="include\Tabuleiro.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PickInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\PecaTabuleiro.h">

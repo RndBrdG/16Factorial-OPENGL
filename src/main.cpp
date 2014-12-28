@@ -10,7 +10,7 @@
 #include "CGFapplication.h"
 #include "DemoScene.h"
 #include "TPinterface.h"
-#include "PickInterface.h"
+//#include "PickInterface.h"
 #include "XMLScene.h"
 
 using std::cout;
@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 
 			app.setScene(new DemoScene("../res/scene_tab.anf"));
 			app.setInterface(new TPinterface());
-			app.setInterface(new PickInterface());
+			//app.setInterface(new PickInterface());
 
 			app.run();
 	}

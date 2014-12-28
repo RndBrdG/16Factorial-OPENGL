@@ -44,14 +44,16 @@
   <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas -->
   <!--   ver topico 'Notas finais' no enunciado sobre os parametros texlength_... -->
   <textures>
-    <texture id="nuvem" file="../res/cloud.png" texlength_s="30." texlength_t="20." />
+    <texture id="stone" file="../res/cloud.png" texlength_s="30." texlength_t="20." />
+    <texture id="wood" file="../res/madeirapeca.jpg" texlength_s="1." texlength_t="1." />
+    <texture id="plastic" file="../res/madeirapeca.jpg" texlength_s="1." texlength_t="1." />
   </textures>
   <!-- bloco de materiais; -->
   <appearances>
     <!-- deve existir um ou mais blocos "appearance" -->
     <!-- IMPORTANTE: -->
     <!--   textureref e opcional, a utilizar caso haja textura associada a esta aparencia -->
-    <appearance id="nuvens" shininess=".3" textureref="nuvem">
+    <appearance id="nuvens" shininess=".3">
       <component type="ambient" value=".5 .5 .5 1." />
       <component type="diffuse" value="1. 1. 1. 1." />
       <component type="specular" value="0. 0. 0. 0." />

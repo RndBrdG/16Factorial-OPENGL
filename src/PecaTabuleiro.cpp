@@ -10,6 +10,8 @@ Rectangle PecaTabuleiro::forma = Rectangle(0., 3., 0., 3.);
 
 PecaTabuleiro::PecaTabuleiro(float x, float y, std::vector<std::vector<bool>> estrutura) : x(x), y(y), estrutura(estrutura)  {
 	aparencia.setTexture("../res/madeirapeca.jpg");
+	aparencia.setTexture("../res/stone.jpg");
+	aparencia.setTexture("../res/madeirapeca.jpg");
 }
 
 const std::vector<std::vector<bool>>& PecaTabuleiro::getEstrutura() const {
@@ -45,9 +47,9 @@ bool PecaTabuleiro::getTabuleiroPrincipal(){
 }
 
 void PecaTabuleiro::draw() {
+
 	aparencia.apply();
 	forma.draw(3., 3.);
-
 	float translX = .5, translY = .5 * 5;
 
 	for (auto it = estrutura.cbegin(); it != estrutura.cend(); it++) {
