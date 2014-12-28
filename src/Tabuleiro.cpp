@@ -3,6 +3,11 @@
 vector<int> Tabuleiro::cliques = vector<int>();
 
 Tabuleiro::Tabuleiro() {
+	PecaTabuleiro::addTextura("../res/madeirapeca.jpg");
+	PecaTabuleiro::addTextura("../res/stone.jpg");
+	PecaTabuleiro::addTextura("../res/madeirapeca.jpg");
+	PecaTabuleiro::setTextura(0);
+
 	float x = 0, y = 4 * 3;
 
 	for (int i = 0; i < 4; i++, y -= 3) {
@@ -272,8 +277,10 @@ void Tabuleiro::atualizarPecas() {
 			}
 		}
 		else {
-			printf("Hello\n");
-			cliques.clear();
+			vector<int> aux1(cliques.begin(), cliques.begin() + i * 4), aux2(cliques.begin() + i * 4 + 3 + 1, cliques.end());
+			aux1.insert(aux1.end(), aux2.begin(), aux2.end());
+			aux1.swap(cliques);
+			--movimentos;
 		}
 	}
 }

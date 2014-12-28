@@ -123,12 +123,14 @@
   <ItemGroup>
     <None Include="res\cloud.png" />
     <None Include="res\madeirapeca.jpg" />
+    <None Include="res\plastic.jpg" />
     <None Include="res\scene.anf">
       <SubType>Designer</SubType>
     </None>
     <None Include="res\scene_tab.anf" />
     <None Include="res\shader.frag" />
     <None Include="res\shader.vert" />
+    <None Include="res\stone.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

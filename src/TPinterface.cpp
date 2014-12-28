@@ -1,7 +1,7 @@
 #include <sstream>
+#include "PecaTabuleiro.h"
 #include "TPinterface.h"
 #include "DemoScene.h"
-
 
 #define BUFSIZE 256
 GLuint selectBuf[BUFSIZE];
@@ -187,7 +187,7 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		cout << texMode << endl;
 		texMode == 0 ? textura = "../res/madeirapeca.jpg" : texMode == 1 ? textura = "../res/plastic.jpg" : textura = "../res/madeirapeca.jpg";
 		cout << textura << endl;
-		static_cast<DemoScene*>(scene)->tabuleiro.getTab()[0][0]->getAparencia().setTexture(textura);
+		PecaTabuleiro::setTextura(texMode);
 		break;
 	}
 }

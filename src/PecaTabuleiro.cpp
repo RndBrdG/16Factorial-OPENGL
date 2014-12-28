@@ -5,14 +5,20 @@
 
 float ambiente[4] = { 1., 1., 1., 1. }, difusa[4] = { 1., 1., 1., 1. }, especular[4] = { 1., 1., 1., 1. };
 float brilho = 0.;
+std::vector<CGFtexture*> PecaTabuleiro::texturas = vector<CGFtexture*>();
 CGFappearance PecaTabuleiro::aparencia(ambiente, difusa, especular, brilho);
-Rectangle PecaTabuleiro::forma = Rectangle(0., 3., 0., 3.);
+Rectangle PecaTabuleiro::forma(0., 3., 0., 3.);
 
-PecaTabuleiro::PecaTabuleiro(float x, float y, std::vector<std::vector<bool>> estrutura) : x(x), y(y), estrutura(estrutura)  {
-	aparencia.setTexture("../res/madeirapeca.jpg");
-	aparencia.setTexture("../res/stone.jpg");
-	aparencia.setTexture("../res/madeirapeca.jpg");
+PecaTabuleiro::PecaTabuleiro(float x, float y, std::vector<std::vector<bool>> estrutura) : x(x), y(y), estrutura(estrutura) {
 }
+
+void PecaTabuleiro::addTextura(std::string textura) {
+	texturas.push_back(new CGFtexture(textura));
+}
+
+void PecaTabuleiro::setTextura(int indice) {
+	aparencia.setTexture(texturas[indice]);
+};
 
 const std::vector<std::vector<bool>>& PecaTabuleiro::getEstrutura() const {
 	return estrutura;
@@ -47,7 +53,6 @@ bool PecaTabuleiro::getTabuleiroPrincipal(){
 }
 
 void PecaTabuleiro::draw() {
-
 	aparencia.apply();
 	forma.draw(3., 3.);
 	float translX = .5, translY = .5 * 5;
