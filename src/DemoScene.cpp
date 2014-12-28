@@ -7,7 +7,7 @@
 #include <cmath>
 
 DemoScene::DemoScene(char* filename) : parser(XMLScene(filename)) {
-	wind = 1;
+	ultimaAtualizacao = CGFapplication::getTime();
 	this->tabuleiro = Tabuleiro();
 }
 
@@ -88,6 +88,11 @@ void DemoScene::update(unsigned long t) {
 	for (map<string, Animation*>::iterator it = this->elementos.getAnimations().begin(); it != this->elementos.getAnimations().end(); it++){
 		it->second->update(t);
 	}
+
+	if (t - ultimaAtualizacao >= 100) {
+		tabuleiro.atualizarPecas();
+		ultimaAtualizacao -= 100;
+	}
 }
 
 void DemoScene::display() {
@@ -104,7 +109,9 @@ void DemoScene::display() {
 	for (unsigned int i = 0; i < camaras.size(); i++) {
 		if (camaras[i]->getId() == elementos.getCameraDefault()) {
 			id = i;
+			// Trocar comentários das 2 linhas seguintes para permitir ou não a rotação da câmara
 			CGFscene::activeCamera = camaras[i];
+			//camaras[i]->applyView();
 			break;
 		}
 	}
@@ -123,8 +130,8 @@ void DemoScene::display() {
 	}
 	tabuleiro.draw();
 	tabuleiro.drawPecas();
-	// Draw axis
-	axis.draw();
+	// Draw axes
+	//axis.draw();
 
 	// ---- END Background, camera and axis setup
 

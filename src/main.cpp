@@ -23,15 +23,7 @@ int main(int argc, char* argv[]) {
 	try {
 		app.init(&argc, argv);
 
-		/*
-		std::stringstream filename;
-		filename << "../res/";
-		std::cout << endl << "Introduza o nome do ficheiro .anf\nda cena presente em /res (sem extensao): ";
-		std::string temp;
-		getline(std::cin, temp);
-		filename << temp << ".anf";
-		std::cout << endl;*/
-			app.setScene(new DemoScene(/*const_cast<char*>(filename.str().c_str())*/"../res/scene_tab.anf"));
+			app.setScene(new DemoScene("../res/scene_tab.anf"));
 			app.setInterface(new TPinterface());
 			app.setInterface(new PickInterface());
 

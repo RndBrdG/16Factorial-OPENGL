@@ -25,7 +25,7 @@ private:
 	Graph elementos;
 	Tabuleiro tabuleiro;
 	vector<Camera*> camaras;
-	int wind;
+	int ultimaAtualizacao;
 };
 
 #endif

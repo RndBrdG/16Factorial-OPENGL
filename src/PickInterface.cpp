@@ -1,5 +1,6 @@
 #include "PickInterface.h"
 #include "CGFapplication.h"
+#include "Tabuleiro.h"
 
 // buffer to be used to store the hits during picking
 #define BUFSIZE 256
@@ -44,7 +45,7 @@ void PickInterface::performPicking(int x, int y)
 	glGetIntegerv(GL_VIEWPORT, viewport);
 
 	// this is multiplied in the projection matrix
-	gluPickMatrix((GLdouble) x, (GLdouble) (CGFapplication::height - y), 5.0, 5.0, viewport);
+	gluPickMatrix((GLdouble)x, (GLdouble)(CGFapplication::height - y), 5.0, 5.0, viewport);
 
 	// multiply the projection matrix stored in our array to ensure same conditions as in normal render
 	glMultMatrixf(projmat);
@@ -65,7 +66,7 @@ void PickInterface::performPicking(int x, int y)
 	processHits(hits, selectBuf);
 }
 
-void PickInterface::processHits(GLint hits, GLuint buffer [])
+void PickInterface::processHits(GLint hits, GLuint buffer[])
 {
 	GLuint *ptr = buffer;
 	GLuint mindepth = 0xFFFFFFFF;
@@ -73,7 +74,7 @@ void PickInterface::processHits(GLint hits, GLuint buffer [])
 	GLuint nselected;
 
 	// iterate over the list of hits, and choosing the one closer to the viewer (lower depth)
-	for (int i = 0; i<hits; i++) {
+	for (int i = 0; i < hits; i++) {
 		int num = *ptr; ptr++;
 		GLuint z1 = *ptr; ptr++;
 		ptr++;
@@ -91,11 +92,13 @@ void PickInterface::processHits(GLint hits, GLuint buffer [])
 	{
 		// this should be replaced by code handling the picked object's ID's (stored in "selected"), 
 		// possibly invoking a method on the scene class and passing "selected" and "nselected"
-		printf("Picked ID's: ");
-		for (int i = 0; i<nselected; i++)
+		printf("Picked IDs: ");
+		for (int i = 0; i < nselected; i++) {
+			Tabuleiro::cliques.push_back(selected[i]);
 			printf("%d ", selected[i]);
+		}
 		printf("\n");
 	}
 	else
-		printf("Nothing selected while picking \n");
+		printf("Nothing selected while picking.\n");
 }

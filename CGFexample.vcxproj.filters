@@ -78,9 +78,6 @@
     <ClCompile Include="src\Plane.cpp">
       <Filter>Source Files\Primitivas</Filter>
     </ClCompile>
-    <ClCompile Include="src\Primitiva.cpp">
-      <Filter>Source Files\Primitivas</Filter>
-    </ClCompile>
     <ClCompile Include="src\Patch.cpp">
       <Filter>Source Files\Primitivas</Filter>
     </ClCompile>
@@ -98,6 +95,21 @@
     </ClCompile>
     <ClCompile Include="src\PecaTabuleiro.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rectangle.cpp">
+      <Filter>Source Files\Primitivas</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Triangle.cpp">
+      <Filter>Source Files\Primitivas</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cylinder.cpp">
+      <Filter>Source Files\Primitivas</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sphere.cpp">
+      <Filter>Source Files\Primitivas</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Torus.cpp">
+      <Filter>Source Files\Primitivas</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +166,21 @@
     </ClInclude>
     <ClInclude Include="include\PecaTabuleiro.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rectangle.h">
+      <Filter>Header Files\Primitivas</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Triangle.h">
+      <Filter>Header Files\Primitivas</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Cylinder.h">
+      <Filter>Header Files\Primitivas</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Sphere.h">
+      <Filter>Header Files\Primitivas</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Torus.h">
+      <Filter>Header Files\Primitivas</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

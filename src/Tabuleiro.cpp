@@ -1,23 +1,194 @@
 #include "Tabuleiro.h"
 
-Tabuleiro::Tabuleiro(){
-	for (int i = 0; i < 4; i++){
+vector<int> Tabuleiro::cliques = vector<int>();
+
+Tabuleiro::Tabuleiro() {
+	float x = 0, y = 4 * 3;
+
+	for (int i = 0; i < 4; i++, y -= 3) {
 		vector<PecaTabuleiro*> aux;
-		for (int j = 0; j < 4; j++){
-			PecaTabuleiro *a1 = new PecaTabuleiro();
+		for (int j = 0; j < 4; j++, x += 3) {
+			PecaTabuleiro *a1 = new PecaTabuleiro(x, y);
 			aux.push_back(a1);
 		}
+		x = 0;
 		this->tabuleiro.push_back(aux);
 	}
-	
-	for (int i = 0; i < 4; i++){
-		vector<PecaTabuleiro*> aux;
-		for (int i = 0; i < 4; i++){
-			PecaTabuleiro *a1 = new PecaTabuleiro();
-			aux.push_back(a1);
-		}
-		this->pecas_por_jogar.push_back(aux);
-	}
+
+	vector<PecaTabuleiro*> aux;
+	vector<vector<bool>> config;
+	PecaTabuleiro* a1;
+
+	x = -8; y = 4 * 5;
+
+	for (int i = 0; i < 3; i++)
+		config.push_back(vector<bool>());
+	config[0].push_back(true); config[0].push_back(true); config[0].push_back(true);
+	config[1].push_back(true); config[1].push_back(false); config[1].push_back(true);
+	config[2].push_back(true); config[2].push_back(true); config[2].push_back(true);
+	a1 = new PecaTabuleiro(x, y, config);
+	aux.push_back(a1);
+	y -= 5;
+
+	config.clear();
+	for (int i = 0; i < 3; i++)
+		config.push_back(vector<bool>());
+	config[0].push_back(true); config[0].push_back(true); config[0].push_back(true);
+	config[1].push_back(true); config[1].push_back(false); config[1].push_back(false);
+	config[2].push_back(true); config[2].push_back(true); config[2].push_back(true);
+	a1 = new PecaTabuleiro(x, y, config);
+	aux.push_back(a1);
+	y -= 5;
+
+	config.clear();
+	for (int i = 0; i < 3; i++)
+		config.push_back(vector<bool>());
+	config[0].push_back(true); config[0].push_back(true); config[0].push_back(true);
+	config[1].push_back(true); config[1].push_back(false); config[1].push_back(true);
+	config[2].push_back(false); config[2].push_back(true); config[2].push_back(true);
+	a1 = new PecaTabuleiro(x, y, config);
+	aux.push_back(a1);
+	y -= 5;
+
+	config.clear();
+	for (int i = 0; i < 3; i++)
+		config.push_back(vector<bool>());
+	config[0].push_back(true); config[0].push_back(true); config[0].push_back(true);
+	config[1].push_back(true); config[1].push_back(false); config[1].push_back(false);
+	config[2].push_back(true); config[2].push_back(false); config[2].push_back(true);
+	a1 = new PecaTabuleiro(x, y, config);
+	aux.push_back(a1);
+
+	x = -4; y = 4 * 5;
+	pecas_por_jogar.push_back(aux);
+	aux.clear();
+
+	config.clear();
+	for (int i = 0; i < 3; i++)
+		config.push_back(vector<bool>());
+	config[0].push_back(true); config[0].push_back(true); config[0].push_back(true);
+	config[1].push_back(true); config[1].push_back(false); config[1].push_back(true);
+	config[2].push_back(false); config[2].push_back(false); config[2].push_back(false);
+	a1 = new PecaTabuleiro(x, y, config);
+	aux.push_back(a1);
+	y -= 5;
+
+	config.clear();
+	for (int i = 0; i < 3; i++)
+		config.push_back(vector<bool>());
+	config[0].push_back(true); config[0].push_back(true); config[0].push_back(true);
+	config[1].push_back(false); config[1].push_back(false); config[1].push_back(true);
+	config[2].push_back(false); config[2].push_back(true); config[2].push_back(true);
+	a1 = new PecaTabuleiro(x, y, config);
+	aux.push_back(a1);
+	y -= 5;
+
+	config.clear();
+	for (int i = 0; i < 3; i++)
+		config.push_back(vector<bool>());
+	config[0].push_back(true); config[0].push_back(true); config[0].push_back(true);
+	config[1].push_back(true); config[1].push_back(false); config[1].push_back(false);
+	config[2].push_back(true); config[2].push_back(true); config[2].push_back(false);
+	a1 = new PecaTabuleiro(x, y, config);
+	aux.push_back(a1);
+	y -= 5;
+
+	config.clear();
+	for (int i = 0; i < 3; i++)
+		config.push_back(vector<bool>());
+	config[0].push_back(true); config[0].push_back(true); config[0].push_back(true);
+	config[1].push_back(true); config[1].push_back(false); config[1].push_back(false);
+	config[2].push_back(true); config[2].push_back(false); config[2].push_back(false);
+	a1 = new PecaTabuleiro(x, y, config);
+	aux.push_back(a1);
+
+	x = 13; y = 4 * 5;
+	pecas_por_jogar.push_back(aux);
+	aux.clear();
+
+	config.clear();
+	for (int i = 0; i < 3; i++)
+		config.push_back(vector<bool>());
+	config[0].push_back(true); config[0].push_back(true); config[0].push_back(true);
+	config[1].push_back(true); config[1].push_back(false); config[1].push_back(false);
+	config[2].push_back(false); config[2].push_back(false); config[2].push_back(false);
+	a1 = new PecaTabuleiro(x, y, config);
+	aux.push_back(a1);
+	y -= 5;
+
+	config.clear();
+	for (int i = 0; i < 3; i++)
+		config.push_back(vector<bool>());
+	config[0].push_back(true); config[0].push_back(true); config[0].push_back(true);
+	config[1].push_back(false); config[1].push_back(false); config[1].push_back(true);
+	config[2].push_back(false); config[2].push_back(false); config[2].push_back(false);
+	a1 = new PecaTabuleiro(x, y, config);
+	aux.push_back(a1);
+	y -= 5;
+
+	config.clear();
+	for (int i = 0; i < 3; i++)
+		config.push_back(vector<bool>());
+	config[0].push_back(true); config[0].push_back(true); config[0].push_back(true);
+	config[1].push_back(false); config[1].push_back(false); config[1].push_back(false);
+	config[2].push_back(false); config[2].push_back(false); config[2].push_back(false);
+	a1 = new PecaTabuleiro(x, y, config);
+	aux.push_back(a1);
+	y -= 5;
+
+	config.clear();
+	for (int i = 0; i < 3; i++)
+		config.push_back(vector<bool>());
+	config[0].push_back(true); config[0].push_back(true); config[0].push_back(false);
+	config[1].push_back(true); config[1].push_back(false); config[1].push_back(false);
+	config[2].push_back(false); config[2].push_back(false); config[2].push_back(false);
+	a1 = new PecaTabuleiro(x, y, config);
+	aux.push_back(a1);
+
+	x = 17; y = 4 * 5;
+	pecas_por_jogar.push_back(aux);
+	aux.clear();
+
+	config.clear();
+	for (int i = 0; i < 3; i++)
+		config.push_back(vector<bool>());
+	config[0].push_back(false); config[0].push_back(true); config[0].push_back(true);
+	config[1].push_back(false); config[1].push_back(false); config[1].push_back(false);
+	config[2].push_back(false); config[2].push_back(false); config[2].push_back(false);
+	a1 = new PecaTabuleiro(x, y, config);
+	aux.push_back(a1);
+	y -= 5;
+
+	config.clear();
+	for (int i = 0; i < 3; i++)
+		config.push_back(vector<bool>());
+	config[0].push_back(true); config[0].push_back(true); config[0].push_back(false);
+	config[1].push_back(false); config[1].push_back(false); config[1].push_back(false);
+	config[2].push_back(false); config[2].push_back(false); config[2].push_back(false);
+	a1 = new PecaTabuleiro(x, y, config);
+	aux.push_back(a1);
+	y -= 5;
+
+	config.clear();
+	for (int i = 0; i < 3; i++)
+		config.push_back(vector<bool>());
+	config[0].push_back(true); config[0].push_back(false); config[0].push_back(false);
+	config[1].push_back(false); config[1].push_back(false); config[1].push_back(false);
+	config[2].push_back(false); config[2].push_back(false); config[2].push_back(false);
+	a1 = new PecaTabuleiro(x, y, config);
+	aux.push_back(a1);
+	y -= 5;
+
+	config.clear();
+	for (int i = 0; i < 3; i++)
+		config.push_back(vector<bool>());
+	config[0].push_back(false); config[0].push_back(true); config[0].push_back(false);
+	config[1].push_back(false); config[1].push_back(false); config[1].push_back(false);
+	config[2].push_back(false); config[2].push_back(false); config[2].push_back(false);
+	a1 = new PecaTabuleiro(x, y, config);
+	aux.push_back(a1);
+
+	pecas_por_jogar.push_back(aux);
 }
 
 const vector<vector<PecaTabuleiro*>>& Tabuleiro::getTabuleiro() const {
@@ -28,7 +199,12 @@ const vector<vector<PecaTabuleiro*>>& Tabuleiro::getPecas() const {
 	return this->pecas_por_jogar;
 }
 
-void Tabuleiro::draw(){
+PecaTabuleiro* Tabuleiro::getPecaFromCoords(int i, int j) {
+	if (i >= 100) return pecas_por_jogar[i - 100][j];
+	else return tabuleiro[i][j];
+}
+
+void Tabuleiro::draw() {
 	glPushMatrix();
 	glPushName(-1);		// Load a default name
 	glPopMatrix();
@@ -36,13 +212,11 @@ void Tabuleiro::draw(){
 	for (int r = 0; r < 4; r++)
 	{
 		glPushMatrix();
-		glTranslatef(0, r * 4, 0);
 		glLoadName(r);
 		for (int c = 0; c < 4; c++)
 		{
 			glPushMatrix();
-			glTranslatef((c + 1) * 5, 0, 0);
-			//glRotatef(90, 0, 1, 0);
+			glTranslatef(tabuleiro[r][c]->getX(), tabuleiro[r][c]->getY(), 0);
 			glPushName(c);
 			this->tabuleiro[r][c]->draw();
 			glPopName();
@@ -52,29 +226,41 @@ void Tabuleiro::draw(){
 	}
 }
 
-void Tabuleiro::drawPecas(){
+void Tabuleiro::drawPecas() {
 	for (int r = 0; r < 4; r++)
 	{
 		glPushMatrix();
-		if (r == 0)
-			glTranslatef(-10, 0, 0);
-		else if (r == 1)
-			glTranslatef(-5, 0, 0);
-		else if (r == 2) 
-			glTranslatef(30, 0, 0);
-		else 
-			glTranslatef(35, 0, 0);
-		glLoadName(r+100);
+		glLoadName(r + 100);
 		for (int c = 0; c < 4; c++)
 		{
 			glPushMatrix();
-			glTranslatef(0, c * 5, 0);
-			//glRotatef(90, 0, 1, 0);
+			glTranslatef(pecas_por_jogar[r][c]->getX(), pecas_por_jogar[r][c]->getY(), 0);
 			glPushName(c);
 			this->pecas_por_jogar[r][c]->draw();
 			glPopName();
 			glPopMatrix();
 		}
 		glPopMatrix();
+	}
+}
+
+void Tabuleiro::atualizarPecas() {
+	int movimentos = cliques.size() / 4;
+
+	for (int i = 0; i < movimentos; i++) {
+		PecaTabuleiro* pecaAMover = getPecaFromCoords(cliques[i * 4 + 0], cliques[i * 4 + 1]);
+		PecaTabuleiro* pecaDestino = getPecaFromCoords(cliques[i * 4 + 2], cliques[i * 4 + 3]);
+		if (pecaAMover->getX() > pecaDestino->getX())
+			pecaAMover->getX() - pecaDestino->getX() >= .1 ? pecaAMover->setX(pecaAMover->getX() - .1) : pecaAMover->setX(pecaAMover->getX() - (pecaAMover->getX() - pecaDestino->getX()));
+		else if (pecaAMover->getX() < pecaDestino->getX())
+			pecaDestino->getX() - pecaAMover->getX() >= .1 ? pecaAMover->setX(pecaAMover->getX() + .1) : pecaAMover->setX(pecaAMover->getX() + (pecaDestino->getX() - pecaAMover->getX()));
+		else if (pecaAMover->getY() > pecaDestino->getY())
+			pecaAMover->getY() - pecaDestino->getY() >= .1 ? pecaAMover->setY(pecaAMover->getY() - .1) : pecaAMover->setY(pecaAMover->getY() - (pecaAMover->getY() - pecaDestino->getY()));
+		else if (pecaAMover->getY() < pecaDestino->getY())
+			pecaDestino->getY() - pecaAMover->getY() >= .1 ? pecaAMover->setY(pecaAMover->getY() + .1) : pecaAMover->setY(pecaAMover->getY() + (pecaDestino->getY() - pecaAMover->getY()));
+		else {
+			vector<int>(cliques.begin() + 4, cliques.end()).swap(cliques);
+			--movimentos;
+		}
 	}
 }

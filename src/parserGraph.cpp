@@ -1,3 +1,14 @@
+#include "Cylinder.h"
+#include "Flag.h"
+#include "Globals.h"
+#include "Light.h"
+#include "Patch.h"
+#include "Plane.h"
+#include "Rectangle.h"
+#include "Sphere.h"
+#include "Torus.h"
+#include "Triangle.h"
+#include "Vehicle.h"
 #include "XMLScene.h"
 
 void XMLScene::parserGraph(){

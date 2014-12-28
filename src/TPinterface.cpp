@@ -50,8 +50,6 @@ void TPinterface::initGUI() {
 	addRadioButtonToGroup(radioDesenho, "Linhas");
 	addRadioButtonToGroup(radioDesenho, "Pontos");
 
-	GLUI_Spinner* spinnerWind = addSpinner("Vento", 2, &static_cast<DemoScene*>(scene)->wind);
-
 	addColumn();
 
 	GLUI_Panel* panelLuzes = addPanel("Luzes");
