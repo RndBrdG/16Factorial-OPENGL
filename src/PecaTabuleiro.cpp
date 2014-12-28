@@ -18,7 +18,7 @@ void PecaTabuleiro::addTextura(std::string textura) {
 
 void PecaTabuleiro::setTextura(int indice) {
 	aparencia.setTexture(texturas[indice]);
-};
+}
 
 const std::vector<std::vector<bool>>& PecaTabuleiro::getEstrutura() const {
 	return estrutura;
@@ -42,14 +42,6 @@ float PecaTabuleiro::getY() const {
 
 void PecaTabuleiro::draw(float textS, float textT) {
 	draw();
-}
-
-void PecaTabuleiro::setTabuleiroPrincipal(bool value){
-	this->tabuleiroPrincipal = value;
-}
-
-bool PecaTabuleiro::getTabuleiroPrincipal(){
-	return this->tabuleiroPrincipal;
 }
 
 void PecaTabuleiro::draw() {

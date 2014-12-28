@@ -20,9 +20,8 @@ public:
 	static void addTextura(std::string);
 	static void setTextura(int);
 	const std::vector<std::vector<bool>>& getEstrutura() const;
-	void setX(float), setY(float), setTabuleiroPrincipal(bool);
+	void setX(float), setY(float);
 
-	bool getTabuleiroPrincipal();
 	float getX() const, getY() const;
 
 	void draw(float, float);
