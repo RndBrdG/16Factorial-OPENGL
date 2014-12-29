@@ -15,6 +15,10 @@ const Graph& DemoScene::getElementos() {
 	return elementos;
 }
 
+Tabuleiro& DemoScene::getTabuleiro() {
+	return tabuleiro;
+}
+
 void DemoScene::activateCamera(int id){
 	elementos.setDefaultCamera(camaras[id]->getId());
 
@@ -89,10 +93,7 @@ void DemoScene::update(unsigned long t) {
 		it->second->update(t);
 	}
 
-	if (t - ultimaAtualizacao >= 100) {
-		tabuleiro.atualizarPecas();
-		ultimaAtualizacao -= 100;
-	}
+	tabuleiro.animar(t);
 }
 
 void DemoScene::display() {

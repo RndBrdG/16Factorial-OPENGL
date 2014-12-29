@@ -16,6 +16,7 @@ public:
 	void update(unsigned long t);
 	void activateCamera(int id);
 	const Graph& getElementos();
+	Tabuleiro& getTabuleiro();
 	vector<Camera*>& getCamaras();
 
 	DemoScene(char* filename);

@@ -20,16 +20,16 @@ void PecaTabuleiro::setTextura(int indice) {
 	aparencia.setTexture(texturas[indice]);
 }
 
-const std::vector<std::vector<bool>>& PecaTabuleiro::getEstrutura() const {
-	return estrutura;
-}
-
 void PecaTabuleiro::setX(float x) {
 	this->x = x;
 }
 
 void PecaTabuleiro::setY(float y) {
 	this->y = y;
+}
+
+const std::vector<std::vector<bool>>& PecaTabuleiro::getEstrutura() const {
+	return estrutura;
 }
 
 float PecaTabuleiro::getX() const {

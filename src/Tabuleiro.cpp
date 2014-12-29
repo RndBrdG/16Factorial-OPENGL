@@ -1,8 +1,6 @@
 #include "Tabuleiro.h"
 
-vector<int> Tabuleiro::cliques = vector<int>();
-
-Tabuleiro::Tabuleiro() {
+Tabuleiro::Tabuleiro() : cliques(vector<int>()) {
 	PecaTabuleiro::addTextura("../res/madeirapeca.jpg");
 	PecaTabuleiro::addTextura("../res/stone.jpg");
 	PecaTabuleiro::addTextura("../res/madeirapeca.jpg");
@@ -239,7 +237,15 @@ void Tabuleiro::drawPecas() {
 		for (int c = 0; c < 4; c++)
 		{
 			glPushMatrix();
-			glTranslatef(pecas_por_jogar[r][c]->getX(), pecas_por_jogar[r][c]->getY(), 0);
+			bool temAnimacao = false;
+			for (auto it = animacoes.begin(); it != animacoes.end(); ++it) {
+				if (it->first == pecas_por_jogar[r][c]) {
+					temAnimacao = true;
+					it->second->draw();
+					break;
+				}
+			}
+			if (!temAnimacao) glTranslatef(pecas_por_jogar[r][c]->getX(), pecas_por_jogar[r][c]->getY(), 0);
 			glPushName(c);
 			this->pecas_por_jogar[r][c]->draw();
 			glPopName();
@@ -249,31 +255,47 @@ void Tabuleiro::drawPecas() {
 	}
 }
 
-void Tabuleiro::atualizarPecas() {
+void Tabuleiro::animar(unsigned long t) {
+	for (auto it = animacoes.begin(); it != animacoes.end(); ++it)
+		it->second->update(t);
+}
+
+void Tabuleiro::addClique(int clique) {
+	cliques.push_back(clique);
+
 	int movimentos = cliques.size() / 4;
 
 	for (int i = 0; i < movimentos; i++) {
-		PecaTabuleiro* pecaAMover = getPecaFromCoords(cliques[i * 4 + 0], cliques[i * 4 + 1]);
-		PecaTabuleiro* pecaDestino = getPecaFromCoords(cliques[i * 4 + 2], cliques[i * 4 + 3]);
 		if (cliques[i * 4 + 0] >= 100 && cliques[i * 4 + 2] < 100) {
-			if (pecaAMover->getX() > pecaDestino->getX())
+			/*if (pecaAMover->getX() > pecaDestino->getX())
 				pecaAMover->getX() - pecaDestino->getX() >= .1 ? pecaAMover->setX(pecaAMover->getX() - .1) : pecaAMover->setX(pecaAMover->getX() - (pecaAMover->getX() - pecaDestino->getX()));
-			else if (pecaAMover->getX() < pecaDestino->getX())
+				else if (pecaAMover->getX() < pecaDestino->getX())
 				pecaDestino->getX() - pecaAMover->getX() >= .1 ? pecaAMover->setX(pecaAMover->getX() + .1) : pecaAMover->setX(pecaAMover->getX() + (pecaDestino->getX() - pecaAMover->getX()));
-			else if (pecaAMover->getY() > pecaDestino->getY())
+				else if (pecaAMover->getY() > pecaDestino->getY())
 				pecaAMover->getY() - pecaDestino->getY() >= .1 ? pecaAMover->setY(pecaAMover->getY() - .1) : pecaAMover->setY(pecaAMover->getY() - (pecaAMover->getY() - pecaDestino->getY()));
-			else if (pecaAMover->getY() < pecaDestino->getY())
+				else if (pecaAMover->getY() < pecaDestino->getY())
 				pecaDestino->getY() - pecaAMover->getY() >= .1 ? pecaAMover->setY(pecaAMover->getY() + .1) : pecaAMover->setY(pecaAMover->getY() + (pecaDestino->getY() - pecaAMover->getY()));
-			else {
+				else {
 				vector<int>(cliques.begin() + 4, cliques.end()).swap(cliques);
 				--movimentos;
+				}*/
+			PecaTabuleiro* pecaAMover = getPecaFromCoords(cliques[i * 4 + 0], cliques[i * 4 + 1]);
+			PecaTabuleiro* pecaDestino = getPecaFromCoords(cliques[i * 4 + 2], cliques[i * 4 + 3]);
+			float xInicial = pecaAMover->getX(), yInicial = pecaAMover->getY(), xFinal = pecaDestino->getX(), yFinal = pecaDestino->getY();
+
+			vector<Ponto*> pontosDeControlo;
+			for (int p = 1; p <= 50; ++p) {
+				float x = xInicial + (xFinal - xInicial) / 50. * p, y = yInicial + (yFinal - yInicial) / 50. * p;
+				pontosDeControlo.push_back(new Ponto(x, y, 0));
 			}
+			Animation* animacao = new LinearAnimation("", 5, pontosDeControlo);
+			animacoes.insert(pair<PecaTabuleiro*, Animation*>(pecaAMover, animacao));
 		}
-		else {
-			vector<int> aux1(cliques.begin(), cliques.begin() + i * 4), aux2(cliques.begin() + i * 4 + 3 + 1, cliques.end());
-			aux1.insert(aux1.end(), aux2.begin(), aux2.end());
-			aux1.swap(cliques);
-			--movimentos;
-		}
+
+		vector<int> aux1(cliques.begin(), cliques.begin() + i * 4), aux2(cliques.begin() + i * 4 + 3 + 1, cliques.end());
+		aux1.insert(aux1.end(), aux2.begin(), aux2.end());
+		aux1.swap(cliques);
+		--movimentos;
+		--i;
 	}
 }

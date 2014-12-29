@@ -11,7 +11,6 @@ private:
 	static Rectangle forma;
 	static std::vector<CGFtexture*> texturas;
 	static CGFappearance aparencia;
-	bool tabuleiroPrincipal;
 	std::vector<std::vector<bool>> estrutura;
 	float x, y;
 public:
@@ -19,9 +18,9 @@ public:
 
 	static void addTextura(std::string);
 	static void setTextura(int);
-	const std::vector<std::vector<bool>>& getEstrutura() const;
 	void setX(float), setY(float);
 
+	const std::vector<std::vector<bool>>& getEstrutura() const;
 	float getX() const, getY() const;
 
 	void draw(float, float);
