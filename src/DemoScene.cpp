@@ -22,29 +22,9 @@ Tabuleiro& DemoScene::getTabuleiro() {
 void DemoScene::activateCamera(int id){
 	elementos.setDefaultCamera(camaras[id]->getId());
 
-	glMatrixMode(GL_PROJECTION);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glLoadIdentity();
-
-	if (strcmp(camaras[id]->getType(), "ortho") == 0) {
-		glOrtho(camaras[id]->getLeft(), camaras[id]->getRight(), camaras[id]->getBottom(), camaras[id]->getTop(), camaras[id]->getNear(), camaras[id]->getFar());
-
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-
-		if (strcmp(camaras[id]->getDirection(), "x") == 0)
-			gluLookAt(1, 0, 0, 0, 0, 0, 0, 1, 0);
-		else if (strcmp(camaras[id]->getDirection(), "y") == 0)
-			gluLookAt(0, 1, 0, 0, 0, 0, 0, 0, -1);
-		else
-			gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
-	}
-	else {
-		gluPerspective(camaras[id]->getAngle(), CGFapplication::xy_aspect, camaras[id]->getNear(), camaras[id]->getFar());
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		gluLookAt(camaras[id]->getPosX(), camaras[id]->getPosY(), camaras[id]->getPosZ(), camaras[id]->getTarX(), camaras[id]->getTarY(), camaras[id]->getTarZ(), 0, 1, 0);
-	}
+	if (id == 0)
+		tabuleiro.setRotateAngle(90);
+	else tabuleiro.setRotateAngle(0);
 }
 
 vector<Camera*>& DemoScene::getCamaras() {
@@ -129,8 +109,19 @@ void DemoScene::display() {
 		else it->second->update();
 	}
 
-	tabuleiro.draw();
-	tabuleiro.drawPecas();
+	if (tabuleiro.getRotateAngle() != 0){
+		glPushMatrix();
+		glTranslated(0, 5, 0);
+		tabuleiro.draw();
+		tabuleiro.drawPecas();
+		glPopMatrix();
+	}
+	else {
+		glPushMatrix();
+		tabuleiro.draw();
+		tabuleiro.drawPecas();
+		glPopMatrix();
+	}
 	// Draw axes
 	//axis.draw();
 

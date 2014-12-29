@@ -6,6 +6,7 @@ Tabuleiro::Tabuleiro() : cliques(vector<int>()) {
 	PecaTabuleiro::addTextura("../res/madeirapeca.jpg");
 	PecaTabuleiro::setTextura(2);
 	this->TipoDeJogo = "PVP";
+	this->rotateAngle = 0;
 	resetTabuleiro();
 }
 
@@ -22,6 +23,9 @@ PecaTabuleiro* Tabuleiro::getPecaFromCoords(int i, int j) {
 	else return tabuleiro[i][j];
 }
 
+void Tabuleiro::setRotateAngle(float angle){
+	this->rotateAngle = angle;
+}
 void Tabuleiro::draw() {
 	glPushMatrix();
 	glPushName(-1);		// Load a default name
@@ -49,6 +53,16 @@ void Tabuleiro::drawPecas() {
 	{
 		glPushMatrix();
 		glLoadName(r + 100);
+		if (rotateAngle != 0){
+			if (r < 2){
+				glRotated(rotateAngle, 0, 0, 1);
+				glTranslated(1.5, -20, 0);
+			}
+			else {
+				glRotated(rotateAngle, 0, 0, 1);
+				glTranslated(4.5, -20, 0);
+			}
+		}
 		for (int c = 0; c < 4; c++)
 		{
 			glPushMatrix();
@@ -302,4 +316,8 @@ void Tabuleiro::addClique(int clique) {
 		--movimentos;
 		--i;
 	}
+}
+
+const float &Tabuleiro::getRotateAngle() const{
+	return this->rotateAngle;
 }
