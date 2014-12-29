@@ -125,6 +125,13 @@ void DemoScene::display() {
 	// Draw axes
 	//axis.draw();
 
+	stack<Jogada> temp = tabuleiro.getJogadas();
+	while (!tabuleiro.getJogadas().empty()){
+		Jogada *jog = &tabuleiro.getJogadas().top();
+		cout << "[" << jog->cliques[0] << "," << jog->cliques[1] << "] -> [" << jog->cliques[2] << ", " << jog->cliques[3] << "] > " << tabuleiro.getJogadas().size() << endl;
+		tabuleiro.getJogadas().pop();
+	}
+	tabuleiro.getJogadas() = temp;
 	// ---- END Background, camera and axis setup
 
 	// ---- BEGIN feature demos

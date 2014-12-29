@@ -5,14 +5,20 @@
 #include "PecaTabuleiro.h"
 #include <map>
 #include <vector>
+#include <stack>
 
 using namespace std;
+
+typedef struct Jogada {
+	vector<int> cliques;
+} jogada;
 
 class Tabuleiro {
 private:
 	vector<vector<PecaTabuleiro*>> tabuleiro;
 	vector<vector<PecaTabuleiro*>> pecas_por_jogar;
 	map<PecaTabuleiro*, Animation*> animacoes;
+	stack<Jogada> jogadas;
 	vector<int> cliques;
 	float rotateAngle;
 public:
@@ -30,9 +36,8 @@ public:
 	void addClique(int clique);
 	void resetTabuleiro();
 	void setRotateAngle(float angle);
-	const vector<int> getCliques(){
-		return this->cliques;
-	}
+	stack<Jogada> &getJogadas();
+	const vector<int> getCliques();
 };
 
 #endif

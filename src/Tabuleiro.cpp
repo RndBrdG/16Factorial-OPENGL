@@ -307,6 +307,8 @@ void Tabuleiro::addClique(int clique) {
 				float x = xInicial + (xFinal - xInicial) / 50. * p, y = yInicial + (yFinal - yInicial) / 50. * p;
 				pontosDeControlo.push_back(new Ponto(x, y, 0));
 			}
+			Jogada novaJogada; novaJogada.cliques = cliques;
+			this->jogadas.push(novaJogada);
 			Animation* animacao = new LinearAnimation("", 5, pontosDeControlo);
 			animacoes.insert(pair<PecaTabuleiro*, Animation*>(pecaAMover, animacao));
 		}
@@ -321,4 +323,12 @@ void Tabuleiro::addClique(int clique) {
 
 const float &Tabuleiro::getRotateAngle() const{
 	return this->rotateAngle;
+}
+
+stack<Jogada> &Tabuleiro::getJogadas(){
+	return this->jogadas;
+}
+
+const vector<int> Tabuleiro::getCliques(){
+	return this->cliques;
 }
