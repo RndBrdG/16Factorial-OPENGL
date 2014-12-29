@@ -56,11 +56,11 @@ void Tabuleiro::drawPecas() {
 		if (rotateAngle != 0){
 			if (r < 2){
 				glRotated(rotateAngle, 0, 0, 1);
-				glTranslated(1.5, -20, 0);
+				glTranslated(1.5, -17.5, 0);
 			}
 			else {
 				glRotated(rotateAngle, 0, 0, 1);
-				glTranslated(4.5, -20, 0);
+				glTranslated(4.5, -17.5, 0);
 			}
 		}
 		for (int c = 0; c < 4; c++)
@@ -76,6 +76,7 @@ void Tabuleiro::drawPecas() {
 			}
 			if (!temAnimacao) glTranslatef(pecas_por_jogar[r][c]->getX(), pecas_por_jogar[r][c]->getY(), 0);
 			glPushName(c);
+			glRotated(-rotateAngle, 0, 0, 1);
 			this->pecas_por_jogar[r][c]->draw();
 			glPopName();
 			glPopMatrix();
