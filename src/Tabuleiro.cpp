@@ -4,9 +4,78 @@ Tabuleiro::Tabuleiro() : cliques(vector<int>()) {
 	PecaTabuleiro::addTextura("../res/plastic.jpg");
 	PecaTabuleiro::addTextura("../res/stone.jpg");
 	PecaTabuleiro::addTextura("../res/madeirapeca.jpg");
-	PecaTabuleiro::addTextura("../res/border.jpg");
 	PecaTabuleiro::setTextura(2);
+	this->TipoDeJogo = "PVP";
+	resetTabuleiro();
+}
 
+const vector<vector<PecaTabuleiro*>>& Tabuleiro::getTabuleiro() const {
+	return this->tabuleiro;
+}
+
+const vector<vector<PecaTabuleiro*>>& Tabuleiro::getPecas() const {
+	return this->pecas_por_jogar;
+}
+
+PecaTabuleiro* Tabuleiro::getPecaFromCoords(int i, int j) {
+	if (i >= 100) return pecas_por_jogar[i - 100][j];
+	else return tabuleiro[i][j];
+}
+
+void Tabuleiro::draw() {
+	glPushMatrix();
+	glPushName(-1);		// Load a default name
+	glPopMatrix();
+
+	for (int r = 0; r < 4; r++)
+	{
+		glPushMatrix();
+		glLoadName(r);
+		for (int c = 0; c < 4; c++)
+		{
+			glPushMatrix();
+			glTranslatef(tabuleiro[r][c]->getX(), tabuleiro[r][c]->getY(), 0);
+			glPushName(c);
+			this->tabuleiro[r][c]->draw();
+			glPopName();
+			glPopMatrix();
+		}
+		glPopMatrix();
+	}
+}
+
+void Tabuleiro::drawPecas() {
+	for (int r = 0; r < 4; r++)
+	{
+		glPushMatrix();
+		glLoadName(r + 100);
+		for (int c = 0; c < 4; c++)
+		{
+			glPushMatrix();
+			bool temAnimacao = false;
+			for (auto it = animacoes.begin(); it != animacoes.end(); ++it) {
+				if (it->first == pecas_por_jogar[r][c]) {
+					temAnimacao = true;
+					it->second->draw();
+					break;
+				}
+			}
+			if (!temAnimacao) glTranslatef(pecas_por_jogar[r][c]->getX(), pecas_por_jogar[r][c]->getY(), 0);
+			glPushName(c);
+			this->pecas_por_jogar[r][c]->draw();
+			glPopName();
+			glPopMatrix();
+		}
+		glPopMatrix();
+	}
+}
+
+void Tabuleiro::animar(unsigned long t) {
+	for (auto it = animacoes.begin(); it != animacoes.end(); ++it)
+		it->second->update(t);
+}
+void Tabuleiro::resetTabuleiro(){
+	this->dificuldade = "EASY";
 	float x = 0, y = 4 * 3;
 
 	for (int i = 0; i < 4; i++, y -= 3) {
@@ -193,72 +262,6 @@ Tabuleiro::Tabuleiro() : cliques(vector<int>()) {
 	aux.push_back(a1);
 
 	pecas_por_jogar.push_back(aux);
-}
-
-const vector<vector<PecaTabuleiro*>>& Tabuleiro::getTabuleiro() const {
-	return this->tabuleiro;
-}
-
-const vector<vector<PecaTabuleiro*>>& Tabuleiro::getPecas() const {
-	return this->pecas_por_jogar;
-}
-
-PecaTabuleiro* Tabuleiro::getPecaFromCoords(int i, int j) {
-	if (i >= 100) return pecas_por_jogar[i - 100][j];
-	else return tabuleiro[i][j];
-}
-
-void Tabuleiro::draw() {
-	glPushMatrix();
-	glPushName(-1);		// Load a default name
-	glPopMatrix();
-
-	for (int r = 0; r < 4; r++)
-	{
-		glPushMatrix();
-		glLoadName(r);
-		for (int c = 0; c < 4; c++)
-		{
-			glPushMatrix();
-			glTranslatef(tabuleiro[r][c]->getX(), tabuleiro[r][c]->getY(), 0);
-			glPushName(c);
-			this->tabuleiro[r][c]->draw();
-			glPopName();
-			glPopMatrix();
-		}
-		glPopMatrix();
-	}
-}
-
-void Tabuleiro::drawPecas() {
-	for (int r = 0; r < 4; r++)
-	{
-		glPushMatrix();
-		glLoadName(r + 100);
-		for (int c = 0; c < 4; c++)
-		{
-			glPushMatrix();
-			bool temAnimacao = false;
-			for (auto it = animacoes.begin(); it != animacoes.end(); ++it) {
-				if (it->first == pecas_por_jogar[r][c]) {
-					temAnimacao = true;
-					it->second->draw();
-					break;
-				}
-			}
-			if (!temAnimacao) glTranslatef(pecas_por_jogar[r][c]->getX(), pecas_por_jogar[r][c]->getY(), 0);
-			glPushName(c);
-			this->pecas_por_jogar[r][c]->draw();
-			glPopName();
-			glPopMatrix();
-		}
-		glPopMatrix();
-	}
-}
-
-void Tabuleiro::animar(unsigned long t) {
-	for (auto it = animacoes.begin(); it != animacoes.end(); ++it)
-		it->second->update(t);
 }
 
 void Tabuleiro::addClique(int clique) {

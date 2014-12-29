@@ -107,6 +107,8 @@ TPinterface::TPinterface() {
 	drawingMode = 0;
 	cameraMode = 10;
 	texMode = 20;
+	difMode = 30;
+	gameMode = 40;
 }
 
 void TPinterface::processKeyboard(unsigned char key, int x, int y) {
@@ -146,13 +148,15 @@ void TPinterface::initGUI() {
 
 	addColumn();
 
+	/*
 	GLUI_Panel* panelDesenho = addPanel("Modo de desenho");
 	GLUI_RadioGroup* radioDesenho = addRadioGroupToPanel(panelDesenho, &drawingMode, 1);
 	addRadioButtonToGroup(radioDesenho, "Preencher");
 	addRadioButtonToGroup(radioDesenho, "Linhas");
 	addRadioButtonToGroup(radioDesenho, "Pontos");
-
+	
 	addColumn();
+	*/
 
 	GLUI_Panel* panelLuzes = addPanel("Luzes");
 	for (auto it = static_cast<DemoScene*>(scene)->elementos.getLuzes().cbegin(); it != static_cast<DemoScene*>(scene)->elementos.getLuzes().cend(); it++) {
@@ -171,6 +175,19 @@ void TPinterface::initGUI() {
 	}
 
 	texMode = 2;
+	addColumn();
+	GLUI_Listbox *listaTexturas = addListbox("Dificuldade", &difMode, 30);
+	listaTexturas->add_item(31, "Easy");
+	listaTexturas->add_item(32, "Medium");
+	listaTexturas->add_item(33, "Hard");
+	listaTexturas->set_int_val(31);
+
+	this->addSeparator();
+
+	GLUI_Listbox *tipoJogo = addListbox("Tipo de jogo", &gameMode, 40);
+	tipoJogo->add_item(41, "PVP");
+	tipoJogo->add_item(42, "PVC");
+	tipoJogo->set_int_val(41);
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl) {
@@ -183,11 +200,29 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		static_cast<DemoScene*>(scene)->activateCamera(cameraMode);
 		break;
 	case 20:
-		string textura;
 		cout << texMode << endl;
 		texMode == 0 ? textura = "../res/madeirapeca.jpg" : texMode == 1 ? textura = "../res/plastic.jpg" : textura = "../res/madeirapeca.jpg";
 		cout << textura << endl;
 		PecaTabuleiro::setTextura(texMode);
+		break;
+	case 30:
+		difMode == 31 ? dificuldadePretendida = "EASY" : difMode == 32 ? dificuldadePretendida = "MEDIUM" : dificuldadePretendida = "HARD";
+		if (dificuldadePretendida != static_cast<DemoScene*>(scene)->tabuleiro.dificuldade &&  static_cast<DemoScene*>(scene)->tabuleiro.TipoDeJogo == "PVP"){
+			cout << "Alterada a dificuldade de jogada do computador." << endl;
+			static_cast<DemoScene*>(scene)->tabuleiro.resetTabuleiro();
+		}
+		else cout << "A alteracao nao faz qualquer sentido." << endl;
+		break;
+	case 40:
+		gameType = "";
+		gameMode == 41 ? gameType = "PVP" : gameType = "PVC";
+
+		if (gameType != static_cast<DemoScene*>(scene)->tabuleiro.TipoDeJogo){
+			static_cast<DemoScene*>(scene)->tabuleiro.resetTabuleiro();
+			static_cast<DemoScene*>(scene)->tabuleiro.TipoDeJogo = gameType;
+			cout << "Changing game mode done." << endl;
+		}
+		else cout << "No need to change the mode. Already on this one!" << endl;
 		break;
 	}
 }

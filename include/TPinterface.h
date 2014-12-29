@@ -19,6 +19,12 @@ private:
 	int drawingMode;
 	int cameraMode;
 	int texMode;
+	int difMode;
+	int gameMode;
+
+	string textura;
+	string dificuldadePretendida;
+	string gameType;
 };
 
 #endif
