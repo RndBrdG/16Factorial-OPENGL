@@ -18,6 +18,7 @@ public:
 
 	static void addTextura(std::string);
 	static void setTextura(int);
+
 	void setX(float), setY(float);
 
 	const std::vector<std::vector<bool>>& getEstrutura() const;

@@ -1,10 +1,11 @@
 #include "Tabuleiro.h"
 
 Tabuleiro::Tabuleiro() : cliques(vector<int>()) {
-	PecaTabuleiro::addTextura("../res/madeirapeca.jpg");
+	PecaTabuleiro::addTextura("../res/plastic.jpg");
 	PecaTabuleiro::addTextura("../res/stone.jpg");
 	PecaTabuleiro::addTextura("../res/madeirapeca.jpg");
-	PecaTabuleiro::setTextura(0);
+	PecaTabuleiro::addTextura("../res/border.jpg");
+	PecaTabuleiro::setTextura(2);
 
 	float x = 0, y = 4 * 3;
 

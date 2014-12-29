@@ -23,6 +23,10 @@ public:
 	void drawPecas();
 	void animar(unsigned long t);
 	void addClique(int clique);
+
+	const vector<int> getCliques(){
+		return this->cliques;
+	}
 };
 
 #endif

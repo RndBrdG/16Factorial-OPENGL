@@ -31,7 +31,7 @@ class CGFlight: public CGFobject
 		void setKl(float f);			///< Sets the linear attenuation factor
 		void setKq(float f);			///< Sets the quadratic attenuation factor
 		void setAngle(float a);			///< Sets the angle of the spotlight's cone
-		
+
 		static float background_ambient[4];
 
 	protected:

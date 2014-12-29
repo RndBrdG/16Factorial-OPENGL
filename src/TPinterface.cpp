@@ -170,7 +170,7 @@ void TPinterface::initGUI() {
 		addRadioButtonToGroup(radioTextures, const_cast<char*>(textName.str().c_str()));
 	}
 
-	texMode = 0;
+	texMode = 2;
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl) {

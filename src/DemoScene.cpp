@@ -110,9 +110,7 @@ void DemoScene::display() {
 	for (unsigned int i = 0; i < camaras.size(); i++) {
 		if (camaras[i]->getId() == elementos.getCameraDefault()) {
 			id = i;
-			// Trocar comentários das 2 linhas seguintes para permitir ou não a rotação da câmara
 			CGFscene::activeCamera = camaras[i];
-			//camaras[i]->applyView();
 			break;
 		}
 	}
@@ -123,12 +121,14 @@ void DemoScene::display() {
 
 	// Draw (and update) lights
 	for (auto it = elementos.getLuzes().cbegin(); it != elementos.getLuzes().cend(); it++) {
+
 		if (it->second->onOff) it->second->enable();
 		else it->second->disable();
 
 		if (it->second->onOff && it->second->getMarker()) it->second->draw();
 		else it->second->update();
 	}
+
 	tabuleiro.draw();
 	tabuleiro.drawPecas();
 	// Draw axes
