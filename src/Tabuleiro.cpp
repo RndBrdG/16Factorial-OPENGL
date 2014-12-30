@@ -292,6 +292,7 @@ void Tabuleiro::atualizarPecas() {
 			else if (pecaAMover->getY() < pecaDestino->getY())
 				pecaDestino->getY() - pecaAMover->getY() >= .4 ? pecaAMover->setY(pecaAMover->getY() + .4) : pecaAMover->setY(pecaAMover->getY() + (pecaDestino->getY() - pecaAMover->getY()));
 			else {
+				tabuleiro[cliques[i * 4 + 2]][cliques[i * 4 + 3]] = pecaDestino;
 				*pecaDestino = *pecaAMover;
 
 				vector<int> aux1(cliques.begin(), cliques.begin() + i * 4), aux2(cliques.begin() + i * 4 + 3 + 1, cliques.end());
