@@ -130,7 +130,7 @@ void DemoScene::display() {
 	}
 	// Draw axes
 	//axis.draw();
-
+	/*
 	stack<Jogada> temp = tabuleiro.getJogadas();
 	while (!tabuleiro.getJogadas().empty()){
 		Jogada *jog = &tabuleiro.getJogadas().top();
@@ -138,6 +138,7 @@ void DemoScene::display() {
 		tabuleiro.getJogadas().pop();
 	}
 	tabuleiro.getJogadas() = temp;
+	*/
 	// ---- END Background, camera and axis setup
 
 	// ---- BEGIN feature demos

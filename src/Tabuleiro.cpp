@@ -7,6 +7,8 @@ Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), rotateAngl
 	//PecaTabuleiro::addTextura("../res/stone.jpg");
 	PecaTabuleiro::addTextura("../res/wood.jpg");
 	PecaTabuleiro::setTextura(2);
+
+	this->dificuldade = "EASY";
 	resetTabuleiro();
 }
 
@@ -121,9 +123,13 @@ void Tabuleiro::drawPlacar() {
 }
 
 void Tabuleiro::resetTabuleiro(){
-	this->dificuldade = "EASY";
 	float x = 0, y = 4 * 3;
 
+	// Clear all the board
+	tabuleiro.clear();
+	pecas_por_jogar.clear();
+
+	// Insert pieces.
 	for (int i = 0; i < 4; i++, y -= 3) {
 		vector<PecaTabuleiro*> aux;
 		for (int j = 0; j < 4; j++, x += 3) {
@@ -324,7 +330,7 @@ void Tabuleiro::atualizarPecas() {
 		PecaTabuleiro* pecaDestino = getPecaFromCoords(cliques[i * 4 + 2], cliques[i * 4 + 3]);
 
 		if (cliques[i * 4 + 0] >= 100 && cliques[i * 4 + 2] < 100 && (pecaAMover->getAnimada() || (!pecaAMover->getFixa() && !pecaDestino->getFixa()))) {
-			pecaAMover->setAnimada();
+			pecaAMover->setAnimada(true);
 			pecaAMover->setFixa();
 			pecaDestino->setFixa();
 
@@ -341,6 +347,10 @@ void Tabuleiro::atualizarPecas() {
 				tabuleiro[cliques[i * 4 + 2]][cliques[i * 4 + 3]] = pecaDestino;
 				*pecaDestino = *pecaAMover;
 
+				Jogada a1;
+				a1.cliques = cliques;
+				this->jogadas.push(a1);
+
 				vector<int> aux1(cliques.begin(), cliques.begin() + i * 4), aux2(cliques.begin() + i * 4 + 3 + 1, cliques.end());
 				aux1.insert(aux1.end(), aux2.begin(), aux2.end());
 				aux1.swap(cliques);
@@ -353,5 +363,16 @@ void Tabuleiro::atualizarPecas() {
 			aux1.swap(cliques);
 			--movimentos;
 		}
+	}
+}
+
+void Tabuleiro::undo(){
+
+	if (!jogadas.empty()){
+		vector<int> coords = jogadas.top().cliques;
+		cout << "[" << coords[0] << "," << coords[1] << "] -> [" << coords[2] << ", " << coords[3] << "]" << endl;
+		pecas_por_jogar[coords[0] - 100][coords[1]] = tabuleiro[coords[3]][coords[2]];
+		tabuleiro[coords[3]][coords[2]] = new PecaTabuleiro(coords[3], coords[2]);
+		jogadas.pop();
 	}
 }

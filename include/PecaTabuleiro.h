@@ -20,7 +20,7 @@ public:
 	static void addTextura(std::string);
 	static void setTextura(int);
 
-	void setX(float), setY(float), setFixa(), setAnimada();
+	void setX(float), setY(float), setFixa(), setAnimada(bool);
 
 	const std::vector<std::vector<bool>>& getEstrutura() const;
 	float getX() const, getY() const;

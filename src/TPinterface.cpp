@@ -109,6 +109,7 @@ TPinterface::TPinterface() {
 	texMode = 20;
 	difMode = 30;
 	gameMode = 40;
+	undoMode = 50;
 }
 
 void TPinterface::processKeyboard(unsigned char key, int x, int y) {
@@ -182,6 +183,10 @@ void TPinterface::initGUI() {
 	addSeparator();
 
 	GLUI_EditText* texto = addEditText("Tempo decorrido", static_cast<DemoScene*>(scene)->getTabuleiro().getTempoDecorrido());
+
+	addSeparator();
+
+	GLUI_Button* undo = addButton("UNDO", undoMode);
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl) {
@@ -215,6 +220,10 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 			cout << "Changing game mode done." << endl;
 		}
 		else cout << "No need to change the mode. Already on this one!" << endl;
+		break;
+	case 50:
+		cout << "UNDO MODE" << endl;
+		static_cast<DemoScene*>(scene)->tabuleiro.undo();
 		break;
 	}
 }

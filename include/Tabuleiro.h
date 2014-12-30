@@ -42,6 +42,7 @@ public:
 	void setRotateAngle(float rotateAngle);
 	void setDificuldade(string dificuldade);
 	void setTipoDeJogo(string tipoDeJogo);
+	void undo();
 
 	void draw();
 	void drawPecas();

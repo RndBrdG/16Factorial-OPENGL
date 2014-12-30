@@ -32,8 +32,8 @@ void PecaTabuleiro::setFixa() {
 	fixa = true;
 }
 
-void PecaTabuleiro::setAnimada() {
-	animada = true;
+void PecaTabuleiro::setAnimada(bool animada) {
+	this->animada = animada;
 }
 
 const std::vector<std::vector<bool>>& PecaTabuleiro::getEstrutura() const {
