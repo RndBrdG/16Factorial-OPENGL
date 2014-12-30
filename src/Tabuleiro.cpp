@@ -102,6 +102,7 @@ void Tabuleiro::drawPecas() {
 		}
 		for (int c = 0; c < 4; c++)
 		{
+			if (pecas_por_jogar[r][c]->getFixa() && !pecas_por_jogar[r][c]->getAnimada()) continue; // Não desenhar as peças laterais se já tiverem sido colocadas
 			glPushMatrix();
 			glTranslatef(pecas_por_jogar[r][c]->getX(), pecas_por_jogar[r][c]->getY(), 0);
 			glPushName(c);
@@ -324,7 +325,7 @@ void Tabuleiro::atualizarPecas() {
 		PecaTabuleiro* pecaDestino = getPecaFromCoords(cliques[i * 4 + 2], cliques[i * 4 + 3]);
 
 		if (cliques[i * 4 + 0] >= 100 && cliques[i * 4 + 2] < 100 && (pecaAMover->getAnimada() || (!pecaAMover->getFixa() && !pecaDestino->getFixa()))) {
-			pecaAMover->setAnimada();
+			pecaAMover->setAnimada(true);
 			pecaAMover->setFixa();
 			pecaDestino->setFixa();
 
@@ -338,6 +339,7 @@ void Tabuleiro::atualizarPecas() {
 				pecaDestino->getY() - pecaAMover->getY() >= .4 ? pecaAMover->setY(pecaAMover->getY() + .4) : pecaAMover->setY(pecaAMover->getY() + (pecaDestino->getY() - pecaAMover->getY()));
 			else {
 				jogador = !jogador;
+				pecaAMover->setAnimada(false);
 				tabuleiro[cliques[i * 4 + 2]][cliques[i * 4 + 3]] = pecaDestino;
 				*pecaDestino = *pecaAMover;
 
