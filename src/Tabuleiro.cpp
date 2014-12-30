@@ -374,8 +374,18 @@ void Tabuleiro::undo(){
 	if (!jogadas.empty()){
 		vector<int> coords = jogadas.top().cliques;
 		cout << "[" << coords[0] << "," << coords[1] << "] -> [" << coords[2] << ", " << coords[3] << "]" << endl;
-		pecas_por_jogar[coords[0] - 100][coords[1]] = tabuleiro[coords[3]][coords[2]];
-		tabuleiro[coords[3]][coords[2]] = new PecaTabuleiro(coords[3], coords[2]);
+		PecaTabuleiro* pecaDefault = new PecaTabuleiro(getPecaFromCoords(coords[2], coords[3])->getX(), getPecaFromCoords(coords[2], coords[3])->getY());
+		
+		// NOVA PECA
+		PecaTabuleiro* pecaAMover = new PecaTabuleiro(getPecaFromCoords(coords[2], coords[3])->getX(), getPecaFromCoords(coords[2], coords[3])->getY(), getPecaFromCoords(coords[2], coords[3])->getEstrutura());
+		pecaAMover->setX(getPecaFromCoords(coords[2], coords[3])->getXinicial());
+		pecaAMover->setY(getPecaFromCoords(coords[2], coords[3])->getYinicial());
+		pecaAMover->setXinicial(pecaAMover->getX());
+		pecaAMover->setYinicial(pecaAMover->getY());
+
+		// GUARDAR PEÇA
+		pecas_por_jogar[coords[0] - 100][coords[1]] = pecaAMover;
+		tabuleiro[coords[2]][coords[3]] = pecaDefault;
 		jogadas.pop();
 	}
 }

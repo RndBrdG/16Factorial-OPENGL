@@ -10,6 +10,8 @@ CGFappearance PecaTabuleiro::aparencia(ambiente, difusa, especular, brilho);
 Rectangle PecaTabuleiro::forma(0., 3., 0., 3.);
 
 PecaTabuleiro::PecaTabuleiro(float x, float y, std::vector<std::vector<bool>> estrutura) : x(x), y(y), estrutura(estrutura), fixa(false), animada(false) {
+	this->x_inicial = x;
+	this->y_inicial = y;
 }
 
 void PecaTabuleiro::addTextura(std::string textura) {
@@ -84,4 +86,20 @@ void PecaTabuleiro::draw() {
 		translX = .5;
 		translY -= .5 * 2;
 	}
+}
+
+float PecaTabuleiro::getXinicial() const {
+	return this->x_inicial;
+}
+
+float PecaTabuleiro::getYinicial() const{
+	return this->y_inicial;
+}
+
+void PecaTabuleiro::setXinicial(float x_inicial){
+	this->x_inicial = x_inicial;
+}
+
+void PecaTabuleiro::setYinicial(float y_inicial){
+	this->y_inicial = y_inicial;
 }
