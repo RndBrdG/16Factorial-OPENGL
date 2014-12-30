@@ -17,7 +17,6 @@ class Tabuleiro {
 private:
 	vector<vector<PecaTabuleiro*>> tabuleiro;
 	vector<vector<PecaTabuleiro*>> pecas_por_jogar;
-	map<PecaTabuleiro*, Animation*> animacoes;
 	stack<Jogada> jogadas;
 	vector<int> cliques;
 	float rotateAngle;
@@ -32,7 +31,7 @@ public:
 	PecaTabuleiro* getPecaFromCoords(int, int);
 	void draw();
 	void drawPecas();
-	void animar(unsigned long t);
+	void atualizarPecas();
 	void addClique(int clique);
 	void resetTabuleiro();
 	void setRotateAngle(float angle);

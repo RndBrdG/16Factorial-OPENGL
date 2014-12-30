@@ -17,19 +17,10 @@
   <cameras initial="Perto">
     <!-- tem de existir, pelo menos uma camara dos tipos seguintes (perspective ou ortho) -->
     <!-- no caso da camara ortho, o atributo "direction" define o eixo segundo o qual se efetua a projecao -->
-    <perspective id="90º" near="0.2" far="6.2" angle="90" pos="7.5 15 35" target="7.5 15 0" />
+    <perspective id="90 graus" near="0.2" far="6.2" angle="90" pos="7.5 15 35" target="7.5 15 0" />
     <perspective id="Perto" near="0.2" far="1" angle="90" pos="7.5 15 35" target="7.5 15 0" />
   </cameras>
   <animations>
-    <animation id="translate" span="5" type="linear">
-      <controlpoint xx="0." yy="0." zz="0." />
-      <controlpoint xx="5." yy="0." zz="0." />
-      <controlpoint xx="5." yy="5." zz="0." />
-      <controlpoint xx="5." yy="5." zz="3." />
-      <controlpoint xx="5." yy="7." zz="3." />
-      <controlpoint xx="5." yy="7." zz="10." />
-    </animation>
-    <animation id="rotate" span="0.1" type="circular" center="1. 0. 3." radius="0." startang="20." rotang="20." />
   </animations>
   <!-- bloco de luzes -->
   <lights>

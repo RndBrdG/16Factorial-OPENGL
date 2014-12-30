@@ -73,7 +73,7 @@ void DemoScene::update(unsigned long t) {
 		it->second->update(t);
 	}
 
-	tabuleiro.animar(t);
+	tabuleiro.atualizarPecas();
 }
 
 void DemoScene::display() {
