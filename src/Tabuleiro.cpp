@@ -1,13 +1,12 @@
+#include "CGFapplication.h"
 #include "Tabuleiro.h"
 
-Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), jogador(true) {
+Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), rotateAngle(0), jogador(true), tipoDeJogo("PVP"), tempoInicial(CGFapplication::getTime()), tempoDecorrido(new int(0)) {
 	PecaTabuleiro::addTextura("../res/glass.jpg");
 	PecaTabuleiro::addTextura("../res/plastic.jpg");
 	//PecaTabuleiro::addTextura("../res/stone.jpg");
 	PecaTabuleiro::addTextura("../res/wood.jpg");
 	PecaTabuleiro::setTextura(2);
-	this->tipoDeJogo = "PVP";
-	this->rotateAngle = 0;
 	resetTabuleiro();
 }
 
@@ -46,6 +45,10 @@ string Tabuleiro::getDificuldade() const {
 
 string Tabuleiro::getTipoDeJogo() const {
 	return this->tipoDeJogo;
+}
+
+int* Tabuleiro::getTempoDecorrido() const {
+	return tempoDecorrido;
 }
 
 void Tabuleiro::setRotateAngle(float rotateAngle) {
@@ -312,6 +315,8 @@ void Tabuleiro::addClique(int clique) {
 }
 
 void Tabuleiro::atualizarPecas() {
+	*tempoDecorrido = (CGFapplication::getTime() - tempoInicial) / 1000; // Atualizar o tempo decorrido
+
 	int movimentos = cliques.size() / 4;
 
 	for (int i = 0; i < movimentos; i++) {

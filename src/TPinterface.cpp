@@ -172,12 +172,16 @@ void TPinterface::initGUI() {
 	listaTexturas->add_item(33, "Hard");
 	listaTexturas->set_int_val(31);
 
-	this->addSeparator();
+	addSeparator();
 
 	GLUI_Listbox *tipoJogo = addListbox("Tipo de jogo", &gameMode, 40);
 	tipoJogo->add_item(41, "PVP");
 	tipoJogo->add_item(42, "PVC");
 	tipoJogo->set_int_val(41);
+
+	addSeparator();
+
+	GLUI_EditText* texto = addEditText("Tempo decorrido", static_cast<DemoScene*>(scene)->getTabuleiro().getTempoDecorrido());
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl) {

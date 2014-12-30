@@ -24,6 +24,8 @@ private:
 	bool jogador; // true = 1, false = 2
 	string dificuldade;
 	string tipoDeJogo; // PVP - PLAYER VS PLAYER || PVC - PLAYER VS COMPUTER
+	unsigned long tempoInicial;
+	int* tempoDecorrido;
 public:
 	Tabuleiro();
 
@@ -36,6 +38,7 @@ public:
 	bool getJogador() const;
 	string getDificuldade() const;
 	string getTipoDeJogo() const;
+	int* getTempoDecorrido() const;
 	void setRotateAngle(float rotateAngle);
 	void setDificuldade(string dificuldade);
 	void setTipoDeJogo(string tipoDeJogo);
