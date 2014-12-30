@@ -1,3 +1,4 @@
+﻿
 #include "CGFapplication.h"
 #include "Tabuleiro.h"
 
@@ -104,6 +105,7 @@ void Tabuleiro::drawPecas() {
 		}
 		for (int c = 0; c < 4; c++)
 		{
+			if (pecas_por_jogar[r][c]->getFixa() && !pecas_por_jogar[r][c]->getAnimada()) continue; // N�o desenhar as pe�as laterais se j� tiverem sido colocadas
 			glPushMatrix();
 			glTranslatef(pecas_por_jogar[r][c]->getX(), pecas_por_jogar[r][c]->getY(), 0);
 			glPushName(c);
@@ -344,6 +346,7 @@ void Tabuleiro::atualizarPecas() {
 				pecaDestino->getY() - pecaAMover->getY() >= .4 ? pecaAMover->setY(pecaAMover->getY() + .4) : pecaAMover->setY(pecaAMover->getY() + (pecaDestino->getY() - pecaAMover->getY()));
 			else {
 				jogador = !jogador;
+				pecaAMover->setAnimada(false);
 				tabuleiro[cliques[i * 4 + 2]][cliques[i * 4 + 3]] = pecaDestino;
 				*pecaDestino = *pecaAMover;
 
