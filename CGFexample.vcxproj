@@ -122,6 +122,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\glass.jpg" />
+    <None Include="res\placar_cpu.jpg" />
+    <None Include="res\placar_jog1.jpg" />
+    <None Include="res\placar_jog2.jpg" />
     <None Include="res\plastic.jpg" />
     <None Include="res\scene.anf">
       <SubType>Designer</SubType>
