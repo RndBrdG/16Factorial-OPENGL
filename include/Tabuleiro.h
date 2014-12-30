@@ -15,28 +15,37 @@ typedef struct Jogada {
 
 class Tabuleiro {
 private:
+	Rectangle placar;
 	vector<vector<PecaTabuleiro*>> tabuleiro;
 	vector<vector<PecaTabuleiro*>> pecas_por_jogar;
 	stack<Jogada> jogadas;
 	vector<int> cliques;
 	float rotateAngle;
-public:
+	bool jogador; // true = 1, false = 2
 	string dificuldade;
-	string TipoDeJogo;		// PVP - PLAYER VS PLAYER || PVC - PLAYER VS COMPUTER
+	string tipoDeJogo; // PVP - PLAYER VS PLAYER || PVC - PLAYER VS COMPUTER
+public:
 	Tabuleiro();
+
 	const vector<vector<PecaTabuleiro*>>& getTabuleiro() const;
 	const vector<vector<PecaTabuleiro*>>& getPecas() const;
-	const float &getRotateAngle() const;
-
 	PecaTabuleiro* getPecaFromCoords(int, int);
+	stack<Jogada> &getJogadas();
+	const vector<int> getCliques();
+	const float &getRotateAngle() const;
+	bool getJogador() const;
+	string getDificuldade() const;
+	string getTipoDeJogo() const;
+	void setRotateAngle(float rotateAngle);
+	void setDificuldade(string dificuldade);
+	void setTipoDeJogo(string tipoDeJogo);
+
 	void draw();
 	void drawPecas();
+	void drawPlacar();
 	void atualizarPecas();
 	void addClique(int clique);
 	void resetTabuleiro();
-	void setRotateAngle(float angle);
-	stack<Jogada> &getJogadas();
-	const vector<int> getCliques();
 };
 
 #endif

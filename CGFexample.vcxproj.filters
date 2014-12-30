@@ -178,9 +178,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\cloud.png">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\scene.anf">
       <Filter>Resource Files</Filter>
     </None>
@@ -193,13 +190,16 @@
     <None Include="res\scene_tab.anf">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="res\madeirapeca.jpg">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\plastic.jpg">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="res\stone.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\wood.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\glass.jpg">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

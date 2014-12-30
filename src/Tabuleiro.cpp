@@ -1,11 +1,12 @@
 #include "Tabuleiro.h"
 
-Tabuleiro::Tabuleiro() : cliques(vector<int>()) {
+Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), jogador(true) {
+	PecaTabuleiro::addTextura("../res/glass.jpg");
 	PecaTabuleiro::addTextura("../res/plastic.jpg");
-	PecaTabuleiro::addTextura("../res/stone.jpg");
-	PecaTabuleiro::addTextura("../res/madeirapeca.jpg");
+	//PecaTabuleiro::addTextura("../res/stone.jpg");
+	PecaTabuleiro::addTextura("../res/wood.jpg");
 	PecaTabuleiro::setTextura(2);
-	this->TipoDeJogo = "PVP";
+	this->tipoDeJogo = "PVP";
 	this->rotateAngle = 0;
 	resetTabuleiro();
 }
@@ -23,9 +24,42 @@ PecaTabuleiro* Tabuleiro::getPecaFromCoords(int i, int j) {
 	else return tabuleiro[i][j];
 }
 
-void Tabuleiro::setRotateAngle(float angle){
-	this->rotateAngle = angle;
+stack<Jogada> &Tabuleiro::getJogadas(){
+	return this->jogadas;
 }
+
+const vector<int> Tabuleiro::getCliques(){
+	return this->cliques;
+}
+
+const float &Tabuleiro::getRotateAngle() const{
+	return this->rotateAngle;
+}
+
+bool Tabuleiro::getJogador() const {
+	return this->jogador;
+}
+
+string Tabuleiro::getDificuldade() const {
+	return this->dificuldade;
+}
+
+string Tabuleiro::getTipoDeJogo() const {
+	return this->tipoDeJogo;
+}
+
+void Tabuleiro::setRotateAngle(float rotateAngle) {
+	this->rotateAngle = rotateAngle;
+}
+
+void Tabuleiro::setDificuldade(string dificuldade) {
+	this->dificuldade = dificuldade;
+}
+
+void Tabuleiro::setTipoDeJogo(string tipoDeJogo) {
+	this->tipoDeJogo = tipoDeJogo;
+}
+
 void Tabuleiro::draw() {
 	glPushMatrix();
 	glPushName(-1);		// Load a default name
@@ -75,6 +109,12 @@ void Tabuleiro::drawPecas() {
 		}
 		glPopMatrix();
 	}
+}
+
+void Tabuleiro::drawPlacar() {
+	CGFtexture texturaPlacar = jogador ? ("../res/placar_jog1.jpg") : (tipoDeJogo == "PVP" ? ("../res/placar_jog2.jpg") : ("../res/placar_cpu.jpg"));
+	texturaPlacar.apply();
+	placar.draw(12, 6);
 }
 
 void Tabuleiro::resetTabuleiro(){
@@ -292,6 +332,7 @@ void Tabuleiro::atualizarPecas() {
 			else if (pecaAMover->getY() < pecaDestino->getY())
 				pecaDestino->getY() - pecaAMover->getY() >= .4 ? pecaAMover->setY(pecaAMover->getY() + .4) : pecaAMover->setY(pecaAMover->getY() + (pecaDestino->getY() - pecaAMover->getY()));
 			else {
+				jogador = !jogador;
 				tabuleiro[cliques[i * 4 + 2]][cliques[i * 4 + 3]] = pecaDestino;
 				*pecaDestino = *pecaAMover;
 
@@ -308,16 +349,4 @@ void Tabuleiro::atualizarPecas() {
 			--movimentos;
 		}
 	}
-}
-
-const float &Tabuleiro::getRotateAngle() const{
-	return this->rotateAngle;
-}
-
-stack<Jogada> &Tabuleiro::getJogadas(){
-	return this->jogadas;
-}
-
-const vector<int> Tabuleiro::getCliques(){
-	return this->cliques;
 }

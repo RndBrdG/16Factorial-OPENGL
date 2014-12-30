@@ -35,9 +35,10 @@
   <!-- bloco de texturas. Este bloco tem de existir mas pode estar vazio, se nao forem usadas texturas -->
   <!--   ver topico 'Notas finais' no enunciado sobre os parametros texlength_... -->
   <textures>
-    <texture id="stone" file="../res/cloud.png" texlength_s="30." texlength_t="20." />
-    <texture id="wood" file="../res/madeirapeca.jpg" texlength_s="1." texlength_t="1." />
-    <texture id="plastic" file="../res/madeirapeca.jpg" texlength_s="1." texlength_t="1." />
+    <texture id="Glass" file="../res/glass.jpg" texlength_s="1." texlength_t="1." />
+    <texture id="Plastic" file="../res/madeirapeca.jpg" texlength_s="1." texlength_t="1." />
+    <!--<texture id="Stone" file="../res/cloud.png" texlength_s="30." texlength_t="20." />-->
+    <texture id="Wood" file="../res/madeirapeca.jpg" texlength_s="1." texlength_t="1." />
   </textures>
   <!-- bloco de materiais; -->
   <appearances>

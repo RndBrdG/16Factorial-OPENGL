@@ -111,13 +111,19 @@ void DemoScene::display() {
 
 	if (tabuleiro.getRotateAngle() != 0){
 		glPushMatrix();
-		glTranslated(0, 5, 0);
+		glTranslatef(0, 5, 0);
 		tabuleiro.draw();
 		tabuleiro.drawPecas();
 		glPopMatrix();
 	}
 	else {
 		glPushMatrix();
+
+		glPushMatrix();
+		glTranslatef(0, 4*4, 0);
+		tabuleiro.drawPlacar();
+		glPopMatrix();
+		
 		tabuleiro.draw();
 		tabuleiro.drawPecas();
 		glPopMatrix();
