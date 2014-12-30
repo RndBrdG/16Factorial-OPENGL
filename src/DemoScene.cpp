@@ -112,8 +112,27 @@ void DemoScene::display() {
 	if (tabuleiro.getRotateAngle() != 0){
 		glPushMatrix();
 		glTranslatef(0, 5, 0);
-		tabuleiro.draw();
-		tabuleiro.drawPecas();
+		if (!tabuleiro.getRevive()){
+			tabuleiro.draw();
+			tabuleiro.drawPecas();
+		}
+		else {
+			tabuleiro.resetTabuleiro();
+			stack<Jogada> temp = tabuleiro.getJogadas();
+			while (!tabuleiro.getJogadas().empty()){
+				Jogada *jog = &tabuleiro.getJogadas().top();
+				tabuleiro.addClique(jog->cliques[0]);
+				tabuleiro.addClique(jog->cliques[1]);
+				tabuleiro.addClique(jog->cliques[2]);
+				tabuleiro.addClique(jog->cliques[3]);
+				tabuleiro.atualizarPecas();
+				tabuleiro.draw();
+				tabuleiro.drawPecas();
+				tabuleiro.getJogadas().pop();
+			}
+			tabuleiro.getJogadas() = temp;
+			tabuleiro.setRevive();
+		}
 		glPopMatrix();
 	}
 	else {
@@ -123,9 +142,27 @@ void DemoScene::display() {
 		glTranslatef(0, 4*4, 0);
 		tabuleiro.drawPlacar();
 		glPopMatrix();
-		
-		tabuleiro.draw();
-		tabuleiro.drawPecas();
+		if (!tabuleiro.getRevive()){
+			tabuleiro.draw();
+			tabuleiro.drawPecas();
+		}
+		else {
+			tabuleiro.resetTabuleiro();
+			stack<Jogada> temp = tabuleiro.getJogadas();
+			while (!tabuleiro.getJogadas().empty()){
+				Jogada *jog = &tabuleiro.getJogadas().top();
+				tabuleiro.addClique(jog->cliques[0]);
+				tabuleiro.addClique(jog->cliques[1]);
+				tabuleiro.addClique(jog->cliques[2]);
+				tabuleiro.addClique(jog->cliques[3]);
+				tabuleiro.atualizarPecas();
+				tabuleiro.draw();
+				tabuleiro.drawPecas();
+				tabuleiro.getJogadas().pop();
+			}
+			tabuleiro.getJogadas() = temp;
+			tabuleiro.setRevive();
+		}
 		glPopMatrix();
 	}
 	// Draw axes

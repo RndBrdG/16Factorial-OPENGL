@@ -9,6 +9,7 @@ Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), rotateAngl
 	PecaTabuleiro::addTextura("../res/wood.jpg");
 	PecaTabuleiro::setTextura(2);
 
+	this->revive = false;
 	this->dificuldade = "EASY";
 	resetTabuleiro();
 }
@@ -387,5 +388,14 @@ void Tabuleiro::undo(){
 		pecas_por_jogar[coords[0] - 100][coords[1]] = pecaAMover;
 		tabuleiro[coords[2]][coords[3]] = pecaDefault;
 		jogadas.pop();
+		jogador = !jogador;
 	}
+}
+
+void Tabuleiro::setRevive(){
+	this->revive = !revive;
+}
+
+bool Tabuleiro::getRevive() const{
+	return this->revive;
 }

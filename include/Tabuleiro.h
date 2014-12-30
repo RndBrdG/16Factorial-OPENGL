@@ -26,6 +26,7 @@ private:
 	string tipoDeJogo; // PVP - PLAYER VS PLAYER || PVC - PLAYER VS COMPUTER
 	unsigned long tempoInicial;
 	int* tempoDecorrido;
+	bool revive;
 public:
 	Tabuleiro();
 
@@ -36,6 +37,7 @@ public:
 	const vector<int> getCliques();
 	const float &getRotateAngle() const;
 	bool getJogador() const;
+	bool getRevive() const;
 	string getDificuldade() const;
 	string getTipoDeJogo() const;
 	int* getTempoDecorrido() const;
@@ -43,6 +45,7 @@ public:
 	void setDificuldade(string dificuldade);
 	void setTipoDeJogo(string tipoDeJogo);
 	void undo();
+	void setRevive();
 
 	void draw();
 	void drawPecas();

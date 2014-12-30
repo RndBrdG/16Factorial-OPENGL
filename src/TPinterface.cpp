@@ -110,6 +110,7 @@ TPinterface::TPinterface() {
 	difMode = 30;
 	gameMode = 40;
 	undoMode = 50;
+	reviveMode = 60;
 }
 
 void TPinterface::processKeyboard(unsigned char key, int x, int y) {
@@ -147,6 +148,9 @@ void TPinterface::initGUI() {
 		addRadioButtonToGroup(radioCam, static_cast<DemoScene*>(scene)->getCamaras()[i]->getId());
 	}
 
+	addSeparator();
+	GLUI_Button* undo = addButton("UNDO", undoMode);
+
 	addColumn();
 
 	GLUI_Panel* panelLuzes = addPanel("Luzes");
@@ -156,6 +160,8 @@ void TPinterface::initGUI() {
 		lightName << it->first;
 		addCheckboxToPanel(panelLuzes, const_cast<char*>(lightName.str().c_str()), &it->second->onOff, id++);
 	}
+	addSeparator();
+	GLUI_Button* revive = addButton("Revive your game", reviveMode);
 	addColumn();
 	GLUI_Panel* panelTex = addPanel("Texturas");
 	GLUI_RadioGroup* radioTextures = addRadioGroupToPanel(panelTex, &texMode, 20);
@@ -181,12 +187,8 @@ void TPinterface::initGUI() {
 	tipoJogo->set_int_val(41);
 
 	addSeparator();
-
 	GLUI_EditText* texto = addEditText("Tempo decorrido", static_cast<DemoScene*>(scene)->getTabuleiro().getTempoDecorrido());
-
-	addSeparator();
-
-	GLUI_Button* undo = addButton("UNDO", undoMode);
+	
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl) {
@@ -225,5 +227,10 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		cout << "UNDO MODE" << endl;
 		static_cast<DemoScene*>(scene)->tabuleiro.undo();
 		break;
+	case 60:
+		cout << "REVIVE MODE ACTIVATED" << endl;
+		if (!static_cast<DemoScene*>(scene)->tabuleiro.getJogadas().empty())
+			static_cast<DemoScene*>(scene)->tabuleiro.setRevive();
+		else cout << "You need to play atleast once." << endl;
 	}
 }

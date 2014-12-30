@@ -22,6 +22,7 @@ private:
 	int difMode;
 	int gameMode;
 	int undoMode;
+	int reviveMode;
 
 	string textura;
 	string dificuldadePretendida;
