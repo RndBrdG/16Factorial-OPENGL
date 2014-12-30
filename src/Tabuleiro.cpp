@@ -94,23 +94,12 @@ void Tabuleiro::drawPecas() {
 	{
 		glPushMatrix();
 		glLoadName(r + 100);
-		if (rotateAngle != 0){
-			if (r < 2){
-				glRotated(rotateAngle, 0, 0, 1);
-				glTranslated(1.5, -17.5, 0);
-			}
-			else {
-				glRotated(rotateAngle, 0, 0, 1);
-				glTranslated(4.5, -17.5, 0);
-			}
-		}
 		for (int c = 0; c < 4; c++)
 		{
-			if (pecas_por_jogar[r][c]->getFixa() && !pecas_por_jogar[r][c]->getAnimada()) continue; // N�o desenhar as pe�as laterais se j� tiverem sido colocadas
+			if (pecas_por_jogar[r][c]->getFixa() && !pecas_por_jogar[r][c]->getAnimada()) continue; // Nao desenhar as pecas laterais se ja tiverem sido colocadas
 			glPushMatrix();
 			glTranslatef(pecas_por_jogar[r][c]->getX(), pecas_por_jogar[r][c]->getY(), 0);
 			glPushName(c);
-			glRotated(-rotateAngle, 0, 0, 1);
 			this->pecas_por_jogar[r][c]->draw();
 			glPopName();
 			glPopMatrix();
@@ -392,10 +381,10 @@ void Tabuleiro::undo(){
 	}
 }
 
-void Tabuleiro::setRevive(){
+void Tabuleiro::setRevive() {
 	this->revive = !revive;
 }
 
-bool Tabuleiro::getRevive() const{
+bool Tabuleiro::getRevive() const {
 	return this->revive;
 }

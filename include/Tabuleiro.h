@@ -44,8 +44,6 @@ public:
 	void setRotateAngle(float rotateAngle);
 	void setDificuldade(string dificuldade);
 	void setTipoDeJogo(string tipoDeJogo);
-	void undo();
-	void setRevive();
 
 	void draw();
 	void drawPecas();
@@ -53,6 +51,8 @@ public:
 	void atualizarPecas();
 	void addClique(int clique);
 	void resetTabuleiro();
+	void undo();
+	void setRevive();
 };
 
 #endif

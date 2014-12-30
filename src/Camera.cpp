@@ -115,8 +115,10 @@ void Camera::updateProjectionMatrix(int width, int height){
 	}
 }
 
-void Camera::applyView(){
-	if (type == 0){
+void Camera::applyView() {
+	glRotatef(angle, 0, 0, 1);
+
+	if (type == 0) {
 		if (direction == "x")
 			gluLookAt(1, 0, 0, 0, 0, 0, 0, 1, 0);
 		else if (direction == "y")
@@ -124,7 +126,7 @@ void Camera::applyView(){
 		else
 			gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
 	}
-	else{
+	else {
 		gluLookAt(position[0], position[1], position[2], target[0], target[1], target[2], 0, 1, 0);
 	}
 }
