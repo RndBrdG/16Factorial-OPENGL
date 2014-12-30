@@ -149,7 +149,7 @@ void TPinterface::initGUI() {
 	}
 
 	addSeparator();
-	GLUI_Button* undo = addButton("UNDO", undoMode);
+	GLUI_Button* undo = addButton("Anular", undoMode);
 
 	addColumn();
 
@@ -161,7 +161,7 @@ void TPinterface::initGUI() {
 		addCheckboxToPanel(panelLuzes, const_cast<char*>(lightName.str().c_str()), &it->second->onOff, id++);
 	}
 	addSeparator();
-	GLUI_Button* revive = addButton("Revive your game", reviveMode);
+	GLUI_Button* revive = addButton("Relembrar o jogo", reviveMode);
 	addColumn();
 	GLUI_Panel* panelTex = addPanel("Texturas");
 	GLUI_RadioGroup* radioTextures = addRadioGroupToPanel(panelTex, &texMode, 20);
@@ -229,8 +229,15 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		break;
 	case 60:
 		cout << "REVIVE MODE ACTIVATED" << endl;
-		if (!static_cast<DemoScene*>(scene)->tabuleiro.getJogadas().empty())
+		if (!static_cast<DemoScene*>(scene)->tabuleiro.getJogadas().empty()){
 			static_cast<DemoScene*>(scene)->tabuleiro.setRevive();
+			static_cast<DemoScene*>(scene)->tabuleiro.resetTabuleiro();
+			static_cast<DemoScene*>(scene)->backup = static_cast<DemoScene*>(scene)->tabuleiro.getJogadas();
+			static_cast<DemoScene*>(scene)->tabuleiro.clearJogadas();
+		}
 		else cout << "You need to play atleast once." << endl;
+
+		
+		break;
 	}
 }

@@ -340,10 +340,15 @@ void Tabuleiro::atualizarPecas() {
 				tabuleiro[cliques[i * 4 + 2]][cliques[i * 4 + 3]] = pecaDestino;
 				*pecaDestino = *pecaAMover;
 
-				Jogada a1;
-				a1.cliques = cliques;
-				this->jogadas.push(a1);
-
+				if (!this->revive){
+					Jogada a1;
+					a1.cliques = cliques;
+					this->jogadas.push(a1);
+				}
+				else {
+					system("pause");
+					cout << "Ok" << endl;
+				}
 				vector<int> aux1(cliques.begin(), cliques.begin() + i * 4), aux2(cliques.begin() + i * 4 + 3 + 1, cliques.end());
 				aux1.insert(aux1.end(), aux2.begin(), aux2.end());
 				aux1.swap(cliques);
@@ -360,7 +365,7 @@ void Tabuleiro::atualizarPecas() {
 }
 
 void Tabuleiro::undo(){
-
+	cout << "UNDO: " << jogadas.size() << endl;
 	if (!jogadas.empty()){
 		vector<int> coords = jogadas.top().cliques;
 		cout << "[" << coords[0] << "," << coords[1] << "] -> [" << coords[2] << ", " << coords[3] << "]" << endl;
@@ -387,4 +392,13 @@ void Tabuleiro::setRevive() {
 
 bool Tabuleiro::getRevive() const {
 	return this->revive;
+}
+
+void Tabuleiro::clearCliques() {
+	this->cliques.clear();
+}
+
+void Tabuleiro::clearJogadas() {
+	while (!jogadas.empty())
+		jogadas.pop();
 }

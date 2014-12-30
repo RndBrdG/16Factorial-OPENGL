@@ -53,6 +53,8 @@ public:
 	void resetTabuleiro();
 	void undo();
 	void setRevive();
+	void clearCliques();
+	void clearJogadas();
 };
 
 #endif

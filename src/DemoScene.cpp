@@ -72,8 +72,10 @@ void DemoScene::update(unsigned long t) {
 	for (map<string, Animation*>::iterator it = this->elementos.getAnimations().begin(); it != this->elementos.getAnimations().end(); it++){
 		it->second->update(t);
 	}
-
-	tabuleiro.atualizarPecas();
+	cout << "UPDATE 1: " << tabuleiro.getJogadas().size() << endl;
+	if (!tabuleiro.getRevive())
+		tabuleiro.atualizarPecas();
+	//cout << "UPDATE 2: " << tabuleiro.getJogadas().size() << endl;
 }
 
 void DemoScene::display() {
@@ -112,39 +114,39 @@ void DemoScene::display() {
 	glPushMatrix();
 
 	glPushMatrix();
-	glTranslatef(0, 4 * 4, 0);
-	tabuleiro.drawPlacar();
+		glTranslatef(0, 4 * 4, 0);
+		tabuleiro.drawPlacar();
 	glPopMatrix();
 	if (!tabuleiro.getRevive()){
 		tabuleiro.draw();
 		tabuleiro.drawPecas();
 	}
 	else {
-		tabuleiro.resetTabuleiro();
-		stack<Jogada> temp = tabuleiro.getJogadas();
-		while (!tabuleiro.getJogadas().empty()){
-			Jogada *jog = &tabuleiro.getJogadas().top();
-			tabuleiro.addClique(jog->cliques[0]);
-			tabuleiro.addClique(jog->cliques[1]);
-			tabuleiro.addClique(jog->cliques[2]);
-			tabuleiro.addClique(jog->cliques[3]);
-			tabuleiro.atualizarPecas();
-			tabuleiro.draw();
-			tabuleiro.drawPecas();
-			tabuleiro.getJogadas().pop();
+			tabuleiro.resetTabuleiro();
+			stack<Jogada> temp = tabuleiro.getJogadas();
+			while (!tabuleiro.getJogadas().empty()){
+				Jogada *jog = &tabuleiro.getJogadas().top();
+				tabuleiro.addClique(jog->cliques[0]);
+				tabuleiro.addClique(jog->cliques[1]);
+				tabuleiro.addClique(jog->cliques[2]);
+				tabuleiro.addClique(jog->cliques[3]);
+				tabuleiro.atualizarPecas();
+				tabuleiro.draw();
+				tabuleiro.drawPecas();
+				tabuleiro.getJogadas().pop();
+			}
+			tabuleiro.getJogadas() = temp;
+			tabuleiro.setRevive();
 		}
-		tabuleiro.getJogadas() = temp;
-		tabuleiro.setRevive();
-	}
-	glPopMatrix();
+		glPopMatrix();
 	// Draw axes
 	//axis.draw();
 	/*
 	stack<Jogada> temp = tabuleiro.getJogadas();
 	while (!tabuleiro.getJogadas().empty()){
-	Jogada *jog = &tabuleiro.getJogadas().top();
-	cout << "[" << jog->cliques[0] << "," << jog->cliques[1] << "] -> [" << jog->cliques[2] << ", " << jog->cliques[3] << "] > " << tabuleiro.getJogadas().size() << endl;
-	tabuleiro.getJogadas().pop();
+		Jogada *jog = &tabuleiro.getJogadas().top();
+		cout << "[" << jog->cliques[0] << "," << jog->cliques[1] << "] -> [" << jog->cliques[2] << ", " << jog->cliques[3] << "] > " << tabuleiro.getJogadas().size() << endl;
+		tabuleiro.getJogadas().pop();
 	}
 	tabuleiro.getJogadas() = temp;
 	*/

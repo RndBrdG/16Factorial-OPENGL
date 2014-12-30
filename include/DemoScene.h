@@ -18,7 +18,7 @@ public:
 	const Graph& getElementos();
 	Tabuleiro& getTabuleiro();
 	vector<Camera*>& getCamaras();
-
+	stack<Jogada> backup;
 	DemoScene(char* filename);
 	~DemoScene();
 private:
