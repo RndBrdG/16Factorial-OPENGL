@@ -45,7 +45,7 @@ void TPinterface::performPicking(int x, int y)
 	glGetIntegerv(GL_VIEWPORT, viewport);
 
 	// this is multiplied in the projection matrix
-	gluPickMatrix((GLdouble) x, (GLdouble) (CGFapplication::height - y), 5.0, 5.0, viewport);
+	gluPickMatrix((GLdouble)x, (GLdouble)(CGFapplication::height - y), 5.0, 5.0, viewport);
 
 	// multiply the projection matrix stored in our array to ensure same conditions as in normal render
 	glMultMatrixf(projmat);
@@ -66,7 +66,7 @@ void TPinterface::performPicking(int x, int y)
 	processHits(hits, selectBuf);
 }
 
-void TPinterface::processHits(GLint hits, GLuint buffer [])
+void TPinterface::processHits(GLint hits, GLuint buffer[])
 {
 	GLuint *ptr = buffer;
 	GLuint mindepth = 0xFFFFFFFF;
@@ -148,9 +148,6 @@ void TPinterface::initGUI() {
 		addRadioButtonToGroup(radioCam, static_cast<DemoScene*>(scene)->getCamaras()[i]->getId());
 	}
 
-	addSeparator();
-	GLUI_Button* undo = addButton("Anular", undoMode);
-
 	addColumn();
 
 	GLUI_Panel* panelLuzes = addPanel("Luzes");
@@ -160,6 +157,8 @@ void TPinterface::initGUI() {
 		lightName << it->first;
 		addCheckboxToPanel(panelLuzes, const_cast<char*>(lightName.str().c_str()), &it->second->onOff, id++);
 	}
+	addSeparator();
+	GLUI_Button* undo = addButton("Anular", undoMode);
 	addSeparator();
 	GLUI_Button* revive = addButton("Relembrar o jogo", reviveMode);
 	addColumn();
@@ -188,7 +187,7 @@ void TPinterface::initGUI() {
 
 	addSeparator();
 	GLUI_EditText* texto = addEditText("Tempo decorrido", static_cast<DemoScene*>(scene)->getTabuleiro().getTempoDecorrido());
-	
+
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl) {
@@ -206,7 +205,7 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		break;
 	case 30:
 		difMode == 31 ? dificuldadePretendida = "EASY" : difMode == 32 ? dificuldadePretendida = "MEDIUM" : dificuldadePretendida = "HARD";
-		if (dificuldadePretendida != static_cast<DemoScene*>(scene)->tabuleiro.getDificuldade() &&  static_cast<DemoScene*>(scene)->tabuleiro.getTipoDeJogo() == "PVP"){
+		if (dificuldadePretendida != static_cast<DemoScene*>(scene)->tabuleiro.getDificuldade() && static_cast<DemoScene*>(scene)->tabuleiro.getTipoDeJogo() == "PVP"){
 			cout << "Alterada a dificuldade de jogada do computador." << endl;
 			static_cast<DemoScene*>(scene)->tabuleiro.resetTabuleiro();
 		}
@@ -236,7 +235,7 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		}
 		else cout << "You need to play atleast once." << endl;
 
-		
+
 		break;
 	}
 }

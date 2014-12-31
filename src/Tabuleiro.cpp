@@ -340,9 +340,13 @@ void Tabuleiro::atualizarPecas() {
 				tabuleiro[cliques[i * 4 + 2]][cliques[i * 4 + 3]] = pecaDestino;
 				*pecaDestino = *pecaAMover;
 
-				if (!this->revive){
+				if (!this->revive) {
 					Jogada a1;
-					a1.cliques = cliques;
+					a1.cliques = vector<int>();
+					a1.cliques.push_back(cliques[i * 4 + 0]);
+					a1.cliques.push_back(cliques[i * 4 + 1]);
+					a1.cliques.push_back(cliques[i * 4 + 2]);
+					a1.cliques.push_back(cliques[i * 4 + 3]);
 					this->jogadas.push(a1);
 				}
 				else {

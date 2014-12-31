@@ -114,39 +114,42 @@ void DemoScene::display() {
 	glPushMatrix();
 
 	glPushMatrix();
-		glTranslatef(0, 4 * 4, 0);
-		tabuleiro.drawPlacar();
+	glTranslatef(0, 4 * 4, 0);
+	tabuleiro.drawPlacar();
 	glPopMatrix();
 	if (!tabuleiro.getRevive()){
 		tabuleiro.draw();
 		tabuleiro.drawPecas();
 	}
 	else {
-			tabuleiro.resetTabuleiro();
-			stack<Jogada> temp = tabuleiro.getJogadas();
-			while (!tabuleiro.getJogadas().empty()){
-				Jogada *jog = &tabuleiro.getJogadas().top();
-				tabuleiro.addClique(jog->cliques[0]);
-				tabuleiro.addClique(jog->cliques[1]);
-				tabuleiro.addClique(jog->cliques[2]);
-				tabuleiro.addClique(jog->cliques[3]);
-				tabuleiro.atualizarPecas();
-				tabuleiro.draw();
-				tabuleiro.drawPecas();
-				tabuleiro.getJogadas().pop();
-			}
-			tabuleiro.getJogadas() = temp;
-			tabuleiro.setRevive();
+		stack<Jogada> jogadas;
+		while (!tabuleiro.getJogadas().empty()) {
+			jogadas.push(tabuleiro.getJogadas().top());
+			tabuleiro.getJogadas().pop();
 		}
-		glPopMatrix();
+		tabuleiro.resetTabuleiro();
+		while (!jogadas.empty()) {
+			Jogada jog = jogadas.top();
+			tabuleiro.addClique(jog.cliques[0]);
+			tabuleiro.addClique(jog.cliques[1]);
+			tabuleiro.addClique(jog.cliques[2]);
+			tabuleiro.addClique(jog.cliques[3]);
+			tabuleiro.atualizarPecas();
+			tabuleiro.draw();
+			tabuleiro.drawPecas();
+			jogadas.pop();
+		}
+		tabuleiro.setRevive();
+	}
+	glPopMatrix();
 	// Draw axes
 	//axis.draw();
 	/*
 	stack<Jogada> temp = tabuleiro.getJogadas();
 	while (!tabuleiro.getJogadas().empty()){
-		Jogada *jog = &tabuleiro.getJogadas().top();
-		cout << "[" << jog->cliques[0] << "," << jog->cliques[1] << "] -> [" << jog->cliques[2] << ", " << jog->cliques[3] << "] > " << tabuleiro.getJogadas().size() << endl;
-		tabuleiro.getJogadas().pop();
+	Jogada *jog = &tabuleiro.getJogadas().top();
+	cout << "[" << jog->cliques[0] << "," << jog->cliques[1] << "] -> [" << jog->cliques[2] << ", " << jog->cliques[3] << "] > " << tabuleiro.getJogadas().size() << endl;
+	tabuleiro.getJogadas().pop();
 	}
 	tabuleiro.getJogadas() = temp;
 	*/
