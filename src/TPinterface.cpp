@@ -233,7 +233,6 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 			static_cast<DemoScene*>(scene)->tabuleiro.setRevive();
 			static_cast<DemoScene*>(scene)->tabuleiro.resetTabuleiro();
 			static_cast<DemoScene*>(scene)->backup = static_cast<DemoScene*>(scene)->tabuleiro.getJogadas();
-			static_cast<DemoScene*>(scene)->tabuleiro.clearJogadas();
 		}
 		else cout << "You need to play atleast once." << endl;
 
