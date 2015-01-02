@@ -318,6 +318,7 @@ void Tabuleiro::resetTabuleiro(){
 	aux.push_back(a1);
 
 	pecas_por_jogar.push_back(aux);
+
 }
 
 void Tabuleiro::addClique(int clique) {
@@ -355,6 +356,8 @@ void Tabuleiro::atualizarPecas() {
 				tabuleiro[cliques[i * 4 + 2]][cliques[i * 4 + 3]] = pecaDestino;
 				*pecaDestino = *pecaAMover;
 
+				cout << "Peca escolhida: " << (cliques[i * 4 + 0] - 100) * 4 + cliques[i * 4 + 1] << endl;
+
 				if (!this->revive) {
 					Jogada a1;
 					a1.cliques = vector<int>();
@@ -365,7 +368,6 @@ void Tabuleiro::atualizarPecas() {
 					this->jogadas.push(a1);
 				}
 				else {
-					system("pause");
 					cout << "Ok" << endl;
 				}
 				vector<int> aux1(cliques.begin(), cliques.begin() + i * 4), aux2(cliques.begin() + i * 4 + 3 + 1, cliques.end());
@@ -420,4 +422,26 @@ void Tabuleiro::clearCliques() {
 void Tabuleiro::clearJogadas() {
 	while (!jogadas.empty())
 		jogadas.pop();
+}
+
+string Tabuleiro::toString(){
+	string tab = "[";
+
+	for (size_t i = 0; i < 4; i++){
+		tab.append("[");
+
+		for (size_t j = 0; j < 4; j++){
+			tab.append(tabuleiro[i][j]->toString());
+			if (j != 3) tab.append(", ");
+		}
+		tab.append("]\n");
+		if (i != 3) tab.append(", ");
+	}
+	tab.append("]");
+
+	return tab;
+}
+
+void Tabuleiro::setJogador(bool value){
+	this->jogador = value;
 }

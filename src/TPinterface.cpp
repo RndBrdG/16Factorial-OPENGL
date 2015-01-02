@@ -153,7 +153,7 @@ void TPinterface::initGUI() {
 	GLUI_Panel* panelLuzes = addPanel("Luzes");
 	for (auto it = static_cast<DemoScene*>(scene)->elementos.getLuzes().cbegin(); it != static_cast<DemoScene*>(scene)->elementos.getLuzes().cend(); it++) {
 		int id = 2;
-		std::stringstream lightName;
+		stringstream lightName;
 		lightName << it->first;
 		addCheckboxToPanel(panelLuzes, const_cast<char*>(lightName.str().c_str()), &it->second->onOff, id++);
 	}
@@ -218,6 +218,8 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		if (gameType != static_cast<DemoScene*>(scene)->tabuleiro.getTipoDeJogo()){
 			static_cast<DemoScene*>(scene)->tabuleiro.resetTabuleiro();
 			static_cast<DemoScene*>(scene)->tabuleiro.setTipoDeJogo(gameType);
+			static_cast<DemoScene*>(scene)->tabuleiro.clearJogadas();
+			static_cast<DemoScene*>(scene)->tabuleiro.setJogador(true);
 			cout << "Changing game mode done." << endl;
 		}
 		else cout << "No need to change the mode. Already on this one!" << endl;
@@ -231,6 +233,7 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		if (!static_cast<DemoScene*>(scene)->tabuleiro.getJogadas().empty()){
 			static_cast<DemoScene*>(scene)->tabuleiro.setRevive();
 			static_cast<DemoScene*>(scene)->tabuleiro.resetTabuleiro();
+			static_cast<DemoScene*>(scene)->tabuleiro.setJogador(true);
 			static_cast<DemoScene*>(scene)->backup = static_cast<DemoScene*>(scene)->tabuleiro.getJogadas();
 		}
 		else cout << "You need to play atleast once." << endl;

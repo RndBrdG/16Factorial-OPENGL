@@ -7,6 +7,8 @@
 #include <vector>
 #include <stack>
 
+#define VELOCIDADE 0.4
+
 using namespace std;
 
 typedef struct Jogada {
@@ -45,6 +47,7 @@ public:
 	void setRotateAngle(float rotateAngle);
 	void setDificuldade(string dificuldade);
 	void setTipoDeJogo(string tipoDeJogo);
+	void setJogador(bool value);
 
 	void draw();
 	void drawPecas();
@@ -56,6 +59,7 @@ public:
 	void setRevive();
 	void clearCliques();
 	void clearJogadas();
+	string toString();
 };
 
 #endif
