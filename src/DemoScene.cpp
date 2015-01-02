@@ -73,7 +73,6 @@ void DemoScene::update(unsigned long t) {
 	for (map<string, Animation*>::iterator it = this->elementos.getAnimations().begin(); it != this->elementos.getAnimations().end(); it++){
 		it->second->update(t);
 	}
-
 	if (!tabuleiro.getRevive())
 		tabuleiro.atualizarPecas();
 	//cout << "UPDATE 2: " << tabuleiro.getJogadas().size() << endl;

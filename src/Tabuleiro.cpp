@@ -341,6 +341,8 @@ void Tabuleiro::atualizarPecas() {
 				tabuleiro[cliques[i * 4 + 2]][cliques[i * 4 + 3]] = pecaDestino;
 				*pecaDestino = *pecaAMover;
 
+				cout << "Peca escolhida: " << (cliques[i * 4 + 0] - 100) * 4 + cliques[i * 4 + 1] << endl;
+
 				if (!this->revive) {
 					Jogada a1;
 					a1.cliques = vector<int>();
@@ -423,4 +425,8 @@ string Tabuleiro::toString(){
 	tab.append("]");
 
 	return tab;
+}
+
+void Tabuleiro::setJogador(bool value){
+	this->jogador = value;
 }
