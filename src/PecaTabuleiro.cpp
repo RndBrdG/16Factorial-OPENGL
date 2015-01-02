@@ -103,3 +103,42 @@ void PecaTabuleiro::setXinicial(float x_inicial){
 void PecaTabuleiro::setYinicial(float y_inicial){
 	this->y_inicial = y_inicial;
 }
+
+string PecaTabuleiro::toString(){
+	string peca = "";
+
+	if (estrutura.size() != 0){
+		peca.append("[");
+		for (size_t i = 0; i < 3; i++)
+		{
+			peca.append("[");
+			for (size_t j = 0; j < 3; j++)
+			{
+				if (estrutura[i][j] == true)
+				{
+					if (j == 0) peca.append("o");
+					else peca.append(",'o'");
+				}
+				else{
+					if (j == 0) peca.append("' '");
+					else peca.append(",' '");
+				}
+			}
+			if (i != 2) peca.append("],");
+			else peca.append("]");
+		}
+		peca.append("]");
+	}
+	else{
+		peca.append("[");
+		for (size_t i = 0; i < 3; i++)
+		{
+			if( i != 2) peca.append("[' ',' ',' '],");
+			else peca.append("[' ',' ',' ']");
+		}
+		peca.append("]");
+	}
+
+	return peca;
+}
+

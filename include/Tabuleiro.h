@@ -55,6 +55,7 @@ public:
 	void setRevive();
 	void clearCliques();
 	void clearJogadas();
+	string toString();
 };
 
 #endif

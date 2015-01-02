@@ -11,7 +11,7 @@ private:
 	static Rectangle forma;
 	static std::vector<CGFtexture*> texturas;
 	static CGFappearance aparencia;
-	std::vector<std::vector<bool>> estrutura;
+	vector<vector<bool>> estrutura;
 	float x, y;
 	float x_inicial, y_inicial;
 	bool fixa, animada;
@@ -23,6 +23,7 @@ public:
 
 	void setX(float), setY(float), setFixa(), setAnimada(bool);
 	void setXinicial(float), setYinicial(float);
+	string toString();
 
 	const std::vector<std::vector<bool>>& getEstrutura() const;
 	float getX() const, getY() const;

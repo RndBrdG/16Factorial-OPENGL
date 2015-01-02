@@ -65,6 +65,7 @@ void DemoScene::init() {
 	for (auto it = elementos.getCamaras().begin(); it != elementos.getCamaras().end(); it++){
 		camaras.push_back(it->second);
 	}
+
 	setUpdatePeriod(30);
 }
 
@@ -72,7 +73,7 @@ void DemoScene::update(unsigned long t) {
 	for (map<string, Animation*>::iterator it = this->elementos.getAnimations().begin(); it != this->elementos.getAnimations().end(); it++){
 		it->second->update(t);
 	}
-	cout << "UPDATE 1: " << tabuleiro.getJogadas().size() << endl;
+
 	if (!tabuleiro.getRevive())
 		tabuleiro.atualizarPecas();
 	//cout << "UPDATE 2: " << tabuleiro.getJogadas().size() << endl;
@@ -144,15 +145,7 @@ void DemoScene::display() {
 	glPopMatrix();
 	// Draw axes
 	//axis.draw();
-	/*
-	stack<Jogada> temp = tabuleiro.getJogadas();
-	while (!tabuleiro.getJogadas().empty()){
-	Jogada *jog = &tabuleiro.getJogadas().top();
-	cout << "[" << jog->cliques[0] << "," << jog->cliques[1] << "] -> [" << jog->cliques[2] << ", " << jog->cliques[3] << "] > " << tabuleiro.getJogadas().size() << endl;
-	tabuleiro.getJogadas().pop();
-	}
-	tabuleiro.getJogadas() = temp;
-	*/
+
 	// ---- END Background, camera and axis setup
 
 	// ---- BEGIN feature demos
