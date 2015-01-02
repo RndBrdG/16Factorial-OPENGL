@@ -211,5 +211,8 @@
     <None Include="res\placar_jog1.jpg">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="res\rodar.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

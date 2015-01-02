@@ -2,15 +2,13 @@
 #include "CGFapplication.h"
 #include "Tabuleiro.h"
 
-Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), rotateAngle(0), jogador(true), tipoDeJogo("PVP"), tempoInicial(CGFapplication::getTime()), tempoDecorrido(new int(0)) {
+Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(0, 3, 0, 3), rotateAngle(0), jogador(true), dificuldade("EASY"), tipoDeJogo("PVP"), tempoInicial(CGFapplication::getTime()), tempoDecorrido(new int(0)), revive(false) {
 	PecaTabuleiro::addTextura("../res/glass.jpg");
 	PecaTabuleiro::addTextura("../res/plastic.jpg");
 	//PecaTabuleiro::addTextura("../res/stone.jpg");
 	PecaTabuleiro::addTextura("../res/wood.jpg");
 	PecaTabuleiro::setTextura(2);
 
-	this->revive = false;
-	this->dificuldade = "EASY";
 	resetTabuleiro();
 }
 
@@ -23,7 +21,8 @@ const vector<vector<PecaTabuleiro*>>& Tabuleiro::getPecas() const {
 }
 
 PecaTabuleiro* Tabuleiro::getPecaFromCoords(int i, int j) {
-	if (i >= 100) return pecas_por_jogar[i - 100][j];
+	if (i == 105) return NULL;
+	else if (i >= 100) return pecas_por_jogar[i - 100][j];
 	else return tabuleiro[i][j];
 }
 
@@ -106,12 +105,25 @@ void Tabuleiro::drawPecas() {
 		}
 		glPopMatrix();
 	}
+
+	CGFtexture texturaRodar("../res/rodar.jpg");
+	glLoadName(105);
+	glPushMatrix();
+	glTranslatef(4.5, 0, 0);
+	glPushName(0);
+	pecaRodar.draw(3, 3);
+	glPopName();
+	glPopMatrix();
 }
 
 void Tabuleiro::drawPlacar() {
 	CGFtexture texturaPlacar = jogador ? ("../res/placar_jog1.jpg") : (tipoDeJogo == "PVP" ? ("../res/placar_jog2.jpg") : ("../res/placar_cpu.jpg"));
 	texturaPlacar.apply();
+
+	glPushMatrix();
+	glTranslatef(0, 4 * 4, 0);
 	placar.draw(12, 6);
+	glPopMatrix();
 }
 
 void Tabuleiro::resetTabuleiro(){
@@ -321,7 +333,10 @@ void Tabuleiro::atualizarPecas() {
 		PecaTabuleiro* pecaAMover = getPecaFromCoords(cliques[i * 4 + 0], cliques[i * 4 + 1]);
 		PecaTabuleiro* pecaDestino = getPecaFromCoords(cliques[i * 4 + 2], cliques[i * 4 + 3]);
 
-		if (cliques[i * 4 + 0] >= 100 && cliques[i * 4 + 2] < 100 && (pecaAMover->getAnimada() || (!pecaAMover->getFixa() && !pecaDestino->getFixa()))) {
+		if (cliques[i * 4 + 0] >= 100 && cliques[i * 4 + 2] == 105)
+			pecaAMover->rodar();
+
+		if (cliques[i * 4 + 0] >= 100 && cliques[i * 4 + 0] != 105 && cliques[i * 4 + 2] < 100 && (pecaAMover->getAnimada() || (!pecaAMover->getFixa() && !pecaDestino->getFixa()))) {
 			pecaAMover->setAnimada(true);
 			pecaAMover->setFixa();
 			pecaDestino->setFixa();

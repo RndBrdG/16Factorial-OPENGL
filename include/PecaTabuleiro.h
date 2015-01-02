@@ -31,6 +31,7 @@ public:
 
 	void draw(float, float);
 	void draw();
+	void rodar();
 };
 
 #endif

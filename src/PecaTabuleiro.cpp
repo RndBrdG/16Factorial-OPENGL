@@ -88,6 +88,14 @@ void PecaTabuleiro::draw() {
 	}
 }
 
+void PecaTabuleiro::rodar() {
+	std::vector<std::vector<bool>> novaEstrutura(3, vector<bool>(3));
+	for (size_t i = 0; i < 3; ++i)
+		for (size_t j = 0; j < 3; ++j)
+			novaEstrutura[i][j] = estrutura[3 - 1 - j][i];
+	estrutura = novaEstrutura;
+}
+
 float PecaTabuleiro::getXinicial() const {
 	return this->x_inicial;
 }

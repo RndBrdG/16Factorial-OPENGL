@@ -18,6 +18,7 @@ private:
 	Rectangle placar;
 	vector<vector<PecaTabuleiro*>> tabuleiro;
 	vector<vector<PecaTabuleiro*>> pecas_por_jogar;
+	Rectangle pecaRodar;
 	stack<Jogada> jogadas;
 	vector<int> cliques;
 	float rotateAngle;

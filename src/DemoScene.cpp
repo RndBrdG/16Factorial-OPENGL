@@ -113,10 +113,7 @@ void DemoScene::display() {
 
 	glPushMatrix();
 
-	glPushMatrix();
-	glTranslatef(0, 4 * 4, 0);
 	tabuleiro.drawPlacar();
-	glPopMatrix();
 	if (!tabuleiro.getRevive()){
 		tabuleiro.draw();
 		tabuleiro.drawPecas();
