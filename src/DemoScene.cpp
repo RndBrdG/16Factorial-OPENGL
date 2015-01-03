@@ -6,9 +6,7 @@
 #include "TPinterface.h"
 #include <cmath>
 
-DemoScene::DemoScene(char* filename) : parser(XMLScene(filename)) {
-	ultimaAtualizacao = CGFapplication::getTime();
-	this->tabuleiro = Tabuleiro();
+DemoScene::DemoScene(char* filename) : parser(XMLScene(filename)), ultimaAtualizacao(CGFapplication::getTime()) {
 }
 
 const Graph& DemoScene::getElementos() {
@@ -21,10 +19,6 @@ Tabuleiro& DemoScene::getTabuleiro() {
 
 void DemoScene::activateCamera(int id){
 	elementos.setDefaultCamera(camaras[id]->getId());
-
-	if (id == 0)
-		tabuleiro.setRotateAngle(90);
-	else tabuleiro.setRotateAngle(0);
 }
 
 vector<Camera*>& DemoScene::getCamaras() {
