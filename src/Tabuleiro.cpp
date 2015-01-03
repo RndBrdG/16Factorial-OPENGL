@@ -1,4 +1,5 @@
-﻿#include "CGFapplication.h"
+#include "CGFapplication.h"
+#include <sstream>
 #include "Tabuleiro.h"
 
 Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(0, 3, 0, 3), jogador(true), dificuldade("EASY"), tipoDeJogo("PVP"), tempoInicial(CGFapplication::getTime()), minutosDecorridos(new int(0)), segundosDecorridos(new int(0)), tempoJogada(new int(15)), revive(false) {
@@ -7,14 +8,8 @@ Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(
 	//PecaTabuleiro::addTextura("../res/stone.jpg");
 	PecaTabuleiro::addTextura("../res/wood.jpg");
 	PecaTabuleiro::setTextura(2);
-	/*plogcon = Socket();
-	getchar(); // DEBUG
 	plogcon.socketConnect();
-	char *s = "comando(1, 2).\n";
-	plogcon.envia(s, strlen(s));
-	char ans[128];
-	plogcon.recebe(ans);
-	plogcon.quit();*/
+
 	resetTabuleiro();
 }
 
@@ -352,14 +347,21 @@ void Tabuleiro::atualizarPecas() {
 			pecaDestino->setFixa();
 
 			if (pecaAMover->getX() > pecaDestino->getX())
-				pecaAMover->getX() - pecaDestino->getX() >= .4 ? pecaAMover->setX(pecaAMover->getX() - .4) : pecaAMover->setX(pecaAMover->getX() - (pecaAMover->getX() - pecaDestino->getX()));
+				pecaAMover->getX() - pecaDestino->getX() >= VELOCIDADE ? pecaAMover->setX(pecaAMover->getX() - VELOCIDADE) : pecaAMover->setX(pecaAMover->getX() - (pecaAMover->getX() - pecaDestino->getX()));
 			else if (pecaAMover->getX() < pecaDestino->getX())
-				pecaDestino->getX() - pecaAMover->getX() >= .4 ? pecaAMover->setX(pecaAMover->getX() + .4) : pecaAMover->setX(pecaAMover->getX() + (pecaDestino->getX() - pecaAMover->getX()));
+				pecaDestino->getX() - pecaAMover->getX() >= VELOCIDADE ? pecaAMover->setX(pecaAMover->getX() + VELOCIDADE) : pecaAMover->setX(pecaAMover->getX() + (pecaDestino->getX() - pecaAMover->getX()));
 			else if (pecaAMover->getY() > pecaDestino->getY())
-				pecaAMover->getY() - pecaDestino->getY() >= .4 ? pecaAMover->setY(pecaAMover->getY() - .4) : pecaAMover->setY(pecaAMover->getY() - (pecaAMover->getY() - pecaDestino->getY()));
+				pecaAMover->getY() - pecaDestino->getY() >= VELOCIDADE ? pecaAMover->setY(pecaAMover->getY() - VELOCIDADE) : pecaAMover->setY(pecaAMover->getY() - (pecaAMover->getY() - pecaDestino->getY()));
 			else if (pecaAMover->getY() < pecaDestino->getY())
-				pecaDestino->getY() - pecaAMover->getY() >= .4 ? pecaAMover->setY(pecaAMover->getY() + .4) : pecaAMover->setY(pecaAMover->getY() + (pecaDestino->getY() - pecaAMover->getY()));
+				pecaDestino->getY() - pecaAMover->getY() >= VELOCIDADE ? pecaAMover->setY(pecaAMover->getY() + VELOCIDADE) : pecaAMover->setY(pecaAMover->getY() + (pecaDestino->getY() - pecaAMover->getY()));
 			else {
+				stringstream ss;
+				ss << "verificarJogadaValida(" << toString() << "," << cliques[i * 4 + 2] << "," << cliques[i * 4 + 3] << "," << pecaAMover->toString() << ").\n";
+
+				plogcon.envia(const_cast<char*>(ss.str().c_str()), strlen(ss.str().c_str()));
+				char ans[128];
+				plogcon.recebe(ans);
+
 				jogador = !jogador;
 				pecaAMover->setAnimada(false);
 				tabuleiro[cliques[i * 4 + 2]][cliques[i * 4 + 3]] = pecaDestino;
@@ -379,6 +381,42 @@ void Tabuleiro::atualizarPecas() {
 				else {
 					cout << "Ok" << endl;
 				}
+
+				string temp = string(ans);
+
+				if (temp[0] == '2')
+					undo();
+
+				ans[0] = '\0';
+
+				int aux = 0;
+				string temp1 = "[";
+				for (int i = 0; i < 4; i++){
+					for (int j = 0; j < 4; j++){
+						if (!pecas_por_jogar[i][j]->getFixa() && !pecas_por_jogar[i][j]->getAnimada()){
+							if (aux != 0){
+								temp1.append(",");
+							}
+							temp1.append(pecas_por_jogar[i][j]->toString());
+							aux++;
+						}
+					}
+				}
+				temp1.append("]");
+
+				ss.str(string());
+
+				ss << "verificarFimJogo(" << toString() << "," << temp1 << ").\n";
+
+				cout << temp1 << endl;
+
+				plogcon.envia(const_cast<char*>(ss.str().c_str()), strlen(ss.str().c_str()));
+				plogcon.recebe(ans);
+
+				temp = string(ans);
+				if (temp[0] == '1')
+					resetTabuleiro();
+
 				vector<int> aux1(cliques.begin(), cliques.begin() + i * 4), aux2(cliques.begin() + i * 4 + 3 + 1, cliques.end());
 				aux1.insert(aux1.end(), aux2.begin(), aux2.end());
 				aux1.swap(cliques);

@@ -120,12 +120,12 @@ string PecaTabuleiro::toString(){
 			{
 				if (estrutura[i][j] == true)
 				{
-					if (j == 0) peca.append("o");
+					if (j == 0) peca.append("'o'");
 					else peca.append(",'o'");
 				}
 				else{
-					if (j == 0) peca.append("' '");
-					else peca.append(",' '");
+					if (j == 0) peca.append("'.'");
+					else peca.append(",'.'");
 				}
 			}
 			if (i != 2) peca.append("],");
@@ -137,7 +137,7 @@ string PecaTabuleiro::toString(){
 		peca.append("[");
 		for (size_t i = 0; i < 3; i++)
 		{
-			if( i != 2) peca.append("[' ',' ',' '],");
+			if (i != 2) peca.append("[' ',' ',' '],");
 			else peca.append("[' ',' ',' ']");
 		}
 		peca.append("]");
