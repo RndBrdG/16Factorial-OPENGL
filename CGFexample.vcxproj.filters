@@ -108,6 +108,9 @@
     <ClCompile Include="src\Torus.cpp">
       <Filter>Source Files\Primitivas</Filter>
     </ClCompile>
+    <ClCompile Include="src\Socket.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\tinyxml.h">
@@ -161,9 +164,6 @@
     <ClInclude Include="include\PecaTabuleiro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Rectangle.h">
-      <Filter>Header Files\Primitivas</Filter>
-    </ClInclude>
     <ClInclude Include="include\Triangle.h">
       <Filter>Header Files\Primitivas</Filter>
     </ClInclude>
@@ -175,6 +175,12 @@
     </ClInclude>
     <ClInclude Include="include\Torus.h">
       <Filter>Header Files\Primitivas</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rect.h">
+      <Filter>Header Files\Primitivas</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Socket.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

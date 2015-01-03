@@ -8,9 +8,17 @@ Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(
 	//PecaTabuleiro::addTextura("../res/stone.jpg");
 	PecaTabuleiro::addTextura("../res/wood.jpg");
 	PecaTabuleiro::setTextura(2);
-
+	plogcon = Socket();
+	plogcon.socketConnect();
+	char *s = "comando(1, 2).\n";
+	plogcon.envia(s, strlen(s));
+	char ans[128];
+	plogcon.recebe(ans);
+	plogcon.quit();
+	getchar();
 	resetTabuleiro();
 }
+
 
 const vector<vector<PecaTabuleiro*>>& Tabuleiro::getTabuleiro() const {
 	return this->tabuleiro;

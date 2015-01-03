@@ -1,13 +1,13 @@
 #include "Graph.h"
 #include "PecaTabuleiro.h"
-#include "Rectangle.h"
+#include "Rect.h"
 #include "Sphere.h"
 
 float ambiente[4] = { 1., 1., 1., 1. }, difusa[4] = { 1., 1., 1., 1. }, especular[4] = { 1., 1., 1., 1. };
 float brilho = 0.;
 std::vector<CGFtexture*> PecaTabuleiro::texturas = vector<CGFtexture*>();
 CGFappearance PecaTabuleiro::aparencia(ambiente, difusa, especular, brilho);
-Rectangle PecaTabuleiro::forma(0., 3., 0., 3.);
+Rect PecaTabuleiro::forma(0., 3., 0., 3.);
 
 PecaTabuleiro::PecaTabuleiro(float x, float y, std::vector<std::vector<bool>> estrutura) : x(x), y(y), estrutura(estrutura), fixa(false), animada(false) {
 	this->x_inicial = x;

@@ -10,7 +10,6 @@
 #include "CGFapplication.h"
 #include "DemoScene.h"
 #include "TPinterface.h"
-//#include "PickInterface.h"
 #include "XMLScene.h"
 
 using std::cout;

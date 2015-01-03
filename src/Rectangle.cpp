@@ -1,13 +1,13 @@
-#include "Rectangle.h"
+#include "Rect.h"
 
-Rectangle::Rectangle(float x1, float x2, float y1, float y2) {
+Rect::Rect(float x1, float x2, float y1, float y2) {
 	this->x1 = x1;
 	this->x2 = x2;
 	this->y1 = y1;
 	this->y2 = y2;
 }
 
-void Rectangle::draw(float textS, float textT) {
+void Rect::draw(float textS, float textT) {
 	glMatrixMode(GL_TEXTURE);
 	glLoadIdentity();
 	glScalef((x2 - x1) / textS, (y2 - y1) / textT, 1);
@@ -25,7 +25,7 @@ void Rectangle::draw(float textS, float textT) {
 	glEnd();
 }
 
-void Rectangle::draw() {
+void Rect::draw() {
 	glBegin(GL_QUADS);
 	glNormal3f(0, 0, 1);
 	glVertex3f(x1, y1, 0);

@@ -4,7 +4,7 @@
 #include "Light.h"
 #include "Patch.h"
 #include "Plane.h"
-#include "Rectangle.h"
+#include "Rect.h"
 #include "Sphere.h"
 #include "Torus.h"
 #include "Triangle.h"
@@ -147,7 +147,7 @@ void XMLScene::parserGraphPrimitives(Node* novoNode, TiXmlElement *childs){
 				xy1 = primitivas->Attribute("xy1");
 				xy2 = primitivas->Attribute("xy2");
 				if (xy1 != "" && xy2 != "" && sscanf(xy1.c_str(), "%f %f", &x1, &y1) == 2 && sscanf(xy2.c_str(), "%f %f", &x2, &y2) == 2){
-					Rectangle* a1 = new Rectangle(x1, x2, y1, y2);
+					Rect* a1 = new Rect(x1, x2, y1, y2);
 					novoNode->getPrimitivas().push_back(a1);
 				}
 				else std::cout << "\n\nError reading rectangle!";

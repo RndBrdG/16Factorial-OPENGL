@@ -1,6 +1,7 @@
 #ifndef TABULEIRO_H
 #define TABULEIRO_H
 
+#include "Socket.h"
 #include "Animation.h"
 #include "PecaTabuleiro.h"
 #include <map>
@@ -17,10 +18,11 @@ typedef struct Jogada {
 
 class Tabuleiro {
 private:
-	Rectangle placar;
+	Socket plogcon;
+	Rect placar;
 	vector<vector<PecaTabuleiro*>> tabuleiro;
 	vector<vector<PecaTabuleiro*>> pecas_por_jogar;
-	Rectangle pecaRodar;
+	Rect pecaRodar;
 	stack<Jogada> jogadas;
 	vector<int> cliques;
 	float rotateAngle;
@@ -30,6 +32,7 @@ private:
 	unsigned long tempoInicial;
 	int* tempoDecorrido;
 	bool revive;
+
 public:
 	Tabuleiro();
 
@@ -41,6 +44,7 @@ public:
 	const float &getRotateAngle() const;
 	bool getJogador() const;
 	bool getRevive() const;
+
 	string getDificuldade() const;
 	string getTipoDeJogo() const;
 	int* getTempoDecorrido() const;

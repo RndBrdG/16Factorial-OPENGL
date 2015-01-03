@@ -88,6 +88,7 @@
     <ClCompile Include="src\PecaTabuleiro.cpp" />
     <ClCompile Include="src\Plane.cpp" />
     <ClCompile Include="src\Rectangle.cpp" />
+    <ClCompile Include="src\Socket.cpp" />
     <ClCompile Include="src\Sphere.cpp" />
     <ClCompile Include="src\Tabuleiro.cpp" />
     <ClCompile Include="src\Torus.cpp" />
@@ -110,7 +111,8 @@
     <ClInclude Include="include\PecaTabuleiro.h" />
     <ClInclude Include="include\Plane.h" />
     <ClInclude Include="include\Primitiva.h" />
-    <ClInclude Include="include\Rectangle.h" />
+    <ClInclude Include="include\Rect.h" />
+    <ClInclude Include="include\Socket.h" />
     <ClInclude Include="include\Sphere.h" />
     <ClInclude Include="include\Tabuleiro.h" />
     <ClInclude Include="include\tinyxml.h" />

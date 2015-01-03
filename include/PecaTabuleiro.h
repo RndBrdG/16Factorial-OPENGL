@@ -2,13 +2,13 @@
 #define PECATABULEIRO_H
 
 #include "CGFappearance.h"
-#include "Rectangle.h"
+#include "Rect.h"
 #include <string>
 #include <vector>
 
 class PecaTabuleiro: public Primitiva {
 private:
-	static Rectangle forma;
+	static Rect forma;
 	static std::vector<CGFtexture*> texturas;
 	static CGFappearance aparencia;
 	vector<vector<bool>> estrutura;
@@ -25,7 +25,7 @@ public:
 	void setXinicial(float), setYinicial(float);
 	string toString();
 
-	const std::vector<std::vector<bool>>& getEstrutura() const;
+	const vector<vector<bool>>& getEstrutura() const;
 	float getX() const, getY() const;
 	float getXinicial() const, getYinicial() const;
 	bool getFixa() const, getAnimada() const;

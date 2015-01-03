@@ -1,0 +1,15 @@
+#ifndef RECT_H
+#define RECT_H
+
+#include "Primitiva.h"
+
+class Rect : public Primitiva {
+	float x1, x2;
+	float y1, y2;
+public:
+	Rect(float x1, float x2, float y1, float y2);
+	void draw(float textS, float textT);
+	void draw();
+};
+
+#endif
