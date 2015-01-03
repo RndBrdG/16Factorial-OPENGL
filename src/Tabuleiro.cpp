@@ -8,7 +8,11 @@ Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(
 	//PecaTabuleiro::addTextura("../res/stone.jpg");
 	PecaTabuleiro::addTextura("../res/wood.jpg");
 	PecaTabuleiro::setTextura(2);
-	plogcon.socketConnect();
+	if (!plogcon.socketConnect()){
+		cout << "Prolog server is required. Exiting" << endl;
+		system("pause");
+		exit(1);
+	}
 
 	resetTabuleiro();
 }
