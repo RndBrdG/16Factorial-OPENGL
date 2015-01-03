@@ -414,8 +414,10 @@ void Tabuleiro::atualizarPecas() {
 				plogcon.recebe(ans);
 
 				temp = string(ans);
-				if (temp[0] == '1')
+				if (temp[0] == '1'){
+					setJogador(true);
 					resetTabuleiro();
+				}
 
 				vector<int> aux1(cliques.begin(), cliques.begin() + i * 4), aux2(cliques.begin() + i * 4 + 3 + 1, cliques.end());
 				aux1.insert(aux1.end(), aux2.begin(), aux2.end());
