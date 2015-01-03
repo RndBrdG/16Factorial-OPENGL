@@ -9,9 +9,7 @@ std::vector<CGFtexture*> PecaTabuleiro::texturas = vector<CGFtexture*>();
 CGFappearance PecaTabuleiro::aparencia(ambiente, difusa, especular, brilho);
 Rect PecaTabuleiro::forma(0., 3., 0., 3.);
 
-PecaTabuleiro::PecaTabuleiro(float x, float y, std::vector<std::vector<bool>> estrutura) : x(x), y(y), estrutura(estrutura), fixa(false), animada(false) {
-	this->x_inicial = x;
-	this->y_inicial = y;
+PecaTabuleiro::PecaTabuleiro(float x, float y, std::vector<std::vector<bool>> estrutura) : x(x), y(y), x_inicial(x), y_inicial(y), estrutura(estrutura), fixa(false), animada(false), rotacoes(0) {
 }
 
 void PecaTabuleiro::addTextura(std::string textura) {
@@ -58,6 +56,10 @@ bool PecaTabuleiro::getAnimada() const {
 	return animada;
 }
 
+int PecaTabuleiro::getRotacoes() const {
+	return rotacoes;
+}
+
 void PecaTabuleiro::draw(float textS, float textT) {
 	draw();
 }
@@ -94,6 +96,8 @@ void PecaTabuleiro::rodar() {
 		for (size_t j = 0; j < 3; ++j)
 			novaEstrutura[i][j] = estrutura[3 - 1 - j][i];
 	estrutura = novaEstrutura;
+	++rotacoes;
+	rotacoes %= 4;
 }
 
 float PecaTabuleiro::getXinicial() const {
@@ -102,14 +106,6 @@ float PecaTabuleiro::getXinicial() const {
 
 float PecaTabuleiro::getYinicial() const{
 	return this->y_inicial;
-}
-
-void PecaTabuleiro::setXinicial(float x_inicial){
-	this->x_inicial = x_inicial;
-}
-
-void PecaTabuleiro::setYinicial(float y_inicial){
-	this->y_inicial = y_inicial;
 }
 
 string PecaTabuleiro::toString(){

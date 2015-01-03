@@ -1,9 +1,8 @@
-﻿
 #include "CGFapplication.h"
 #include <sstream>
 #include "Tabuleiro.h"
 
-Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(0, 3, 0, 3), rotateAngle(0), jogador(true), dificuldade("EASY"), tipoDeJogo("PVP"), tempoInicial(CGFapplication::getTime()), tempoDecorrido(new int(0)), revive(false) {
+Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(0, 3, 0, 3), jogador(true), dificuldade("EASY"), tipoDeJogo("PVP"), tempoInicial(CGFapplication::getTime()), tempoDecorrido(new int(0)), revive(false) {
 	PecaTabuleiro::addTextura("../res/glass.jpg");
 	PecaTabuleiro::addTextura("../res/plastic.jpg");
 	//PecaTabuleiro::addTextura("../res/stone.jpg");
@@ -12,7 +11,6 @@ Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(
 	plogcon = Socket();
 	plogcon.socketConnect();
 
-	//plogcon.quit();
 	resetTabuleiro();
 }
 
@@ -39,10 +37,6 @@ const vector<int> Tabuleiro::getCliques(){
 	return this->cliques;
 }
 
-const float &Tabuleiro::getRotateAngle() const{
-	return this->rotateAngle;
-}
-
 bool Tabuleiro::getJogador() const {
 	return this->jogador;
 }
@@ -57,10 +51,6 @@ string Tabuleiro::getTipoDeJogo() const {
 
 int* Tabuleiro::getTempoDecorrido() const {
 	return tempoDecorrido;
-}
-
-void Tabuleiro::setRotateAngle(float rotateAngle) {
-	this->rotateAngle = rotateAngle;
 }
 
 void Tabuleiro::setDificuldade(string dificuldade) {
@@ -445,8 +435,6 @@ void Tabuleiro::undo(){
 		PecaTabuleiro* pecaAMover = new PecaTabuleiro(getPecaFromCoords(coords[2], coords[3])->getX(), getPecaFromCoords(coords[2], coords[3])->getY(), getPecaFromCoords(coords[2], coords[3])->getEstrutura());
 		pecaAMover->setX(getPecaFromCoords(coords[2], coords[3])->getXinicial());
 		pecaAMover->setY(getPecaFromCoords(coords[2], coords[3])->getYinicial());
-		pecaAMover->setXinicial(pecaAMover->getX());
-		pecaAMover->setYinicial(pecaAMover->getY());
 
 		// GUARDAR PEÇA
 		pecas_por_jogar[coords[0] - 100][coords[1]] = pecaAMover;

@@ -29,7 +29,7 @@ bool Socket::socketConnect(){
 	clientService.sin_addr.s_addr = inet_addr("127.0.0.1");
 	clientService.sin_port = htons(60070);
 
-	if (connect(m_socket, (SOCKADDR*) &clientService, sizeof(clientService)) == SOCKET_ERROR) {
+	if (connect(m_socket, (SOCKADDR*)&clientService, sizeof(clientService)) == SOCKET_ERROR) {
 		printf("Client: connect() - Failed to connect.\n");
 		WSACleanup();
 		return false;
@@ -65,7 +65,7 @@ void Socket::recebe(char *ans){
 
 void Socket::quit(){
 	cout << "Asking prolog to quit" << endl;
-	char buff [] = "quit.\n";
+	char buff[] = "quit.\n";
 	envia(buff, 6);
 	char ans[128];
 	recebe(ans);

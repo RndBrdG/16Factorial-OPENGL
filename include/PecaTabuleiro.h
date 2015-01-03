@@ -15,6 +15,7 @@ private:
 	float x, y;
 	float x_inicial, y_inicial;
 	bool fixa, animada;
+	int rotacoes;
 public:
 	PecaTabuleiro(float, float, std::vector<std::vector<bool>> = std::vector<std::vector<bool>>());
 
@@ -22,13 +23,13 @@ public:
 	static void setTextura(int);
 
 	void setX(float), setY(float), setFixa(), setAnimada(bool);
-	void setXinicial(float), setYinicial(float);
 	string toString();
 
 	const vector<vector<bool>>& getEstrutura() const;
 	float getX() const, getY() const;
 	float getXinicial() const, getYinicial() const;
 	bool getFixa() const, getAnimada() const;
+	int getRotacoes() const;
 
 	void draw(float, float);
 	void draw();

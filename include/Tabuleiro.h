@@ -25,7 +25,6 @@ private:
 	Rect pecaRodar;
 	stack<Jogada> jogadas;
 	vector<int> cliques;
-	float rotateAngle;
 	bool jogador; // true = 1, false = 2
 	string dificuldade;
 	string tipoDeJogo; // PVP - PLAYER VS PLAYER || PVC - PLAYER VS COMPUTER
@@ -48,7 +47,6 @@ public:
 	string getDificuldade() const;
 	string getTipoDeJogo() const;
 	int* getTempoDecorrido() const;
-	void setRotateAngle(float rotateAngle);
 	void setDificuldade(string dificuldade);
 	void setTipoDeJogo(string tipoDeJogo);
 	void setJogador(bool value);
