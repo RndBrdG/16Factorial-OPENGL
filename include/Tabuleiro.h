@@ -29,9 +29,10 @@ private:
 	string dificuldade;
 	string tipoDeJogo; // PVP - PLAYER VS PLAYER || PVC - PLAYER VS COMPUTER
 	unsigned long tempoInicial;
-	int* tempoDecorrido;
+	int* minutosDecorridos;
+	int* segundosDecorridos;
+	int* tempoJogada;
 	bool revive;
-
 public:
 	Tabuleiro();
 
@@ -46,7 +47,9 @@ public:
 
 	string getDificuldade() const;
 	string getTipoDeJogo() const;
-	int* getTempoDecorrido() const;
+	int* getMinutosDecorridos() const;
+	int* getSegundosDecorridos() const;
+	int* getTempoJogada() const;
 	void setDificuldade(string dificuldade);
 	void setTipoDeJogo(string tipoDeJogo);
 	void setJogador(bool value);

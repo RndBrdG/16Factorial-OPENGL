@@ -148,6 +148,15 @@ void TPinterface::initGUI() {
 		addRadioButtonToGroup(radioCam, static_cast<DemoScene*>(scene)->getCamaras()[i]->getId());
 	}
 
+	GLUI_Panel* panelTex = addPanel("Texturas");
+	GLUI_RadioGroup* radioTextures = addRadioGroupToPanel(panelTex, &texMode, 20);
+	for (auto it = static_cast<DemoScene*>(scene)->elementos.getTexturas().cbegin(); it != static_cast<DemoScene*>(scene)->elementos.getTexturas().cend(); it++) {
+		stringstream textName;
+		textName << it->first;
+		addRadioButtonToGroup(radioTextures, const_cast<char*>(textName.str().c_str()));
+	}
+	texMode = 2;
+
 	addColumn();
 
 	GLUI_Panel* panelLuzes = addPanel("Luzes");
@@ -158,36 +167,28 @@ void TPinterface::initGUI() {
 		addCheckboxToPanel(panelLuzes, const_cast<char*>(lightName.str().c_str()), &it->second->onOff, id++);
 	}
 	addSeparator();
-	GLUI_Button* undo = addButton("Anular", undoMode);
-	addSeparator();
-	GLUI_Button* revive = addButton("Relembrar o jogo", reviveMode);
-	addColumn();
-	GLUI_Panel* panelTex = addPanel("Texturas");
-	GLUI_RadioGroup* radioTextures = addRadioGroupToPanel(panelTex, &texMode, 20);
-	for (auto it = static_cast<DemoScene*>(scene)->elementos.getTexturas().cbegin(); it != static_cast<DemoScene*>(scene)->elementos.getTexturas().cend(); it++) {
-		stringstream textName;
-		textName << it->first;
-		addRadioButtonToGroup(radioTextures, const_cast<char*>(textName.str().c_str()));
-	}
+	GLUI_Spinner* spinnerTempo = addSpinner("Segundos max. jogada", GLUI_SPINNER_INT, static_cast<DemoScene*>(scene)->getTabuleiro().getTempoJogada());
+	spinnerTempo->set_int_limits(0, 120);
+	GLUI_StaticText* textoTempoDecorrido = addStaticText("Tempo decorrido:");
+	GLUI_EditText* textoMinutos = addEditText("Minutos", static_cast<int*>(static_cast<DemoScene*>(scene)->getTabuleiro().getMinutosDecorridos()));
+	GLUI_EditText* textoSegundos = addEditText("Segundos", static_cast<int*>(static_cast<DemoScene*>(scene)->getTabuleiro().getSegundosDecorridos()));
 
-	texMode = 2;
 	addColumn();
+
 	GLUI_Listbox *listaTexturas = addListbox("Dificuldade", &difMode, 30);
 	listaTexturas->add_item(31, "Easy");
 	listaTexturas->add_item(32, "Medium");
 	listaTexturas->add_item(33, "Hard");
 	listaTexturas->set_int_val(31);
-
 	addSeparator();
-
 	GLUI_Listbox *tipoJogo = addListbox("Tipo de jogo", &gameMode, 40);
 	tipoJogo->add_item(41, "PVP");
 	tipoJogo->add_item(42, "PVC");
 	tipoJogo->set_int_val(41);
-
 	addSeparator();
-	GLUI_EditText* texto = addEditText("Tempo decorrido", static_cast<DemoScene*>(scene)->getTabuleiro().getTempoDecorrido());
-
+	GLUI_Button* undo = addButton("Anular", undoMode);
+	addSeparator();
+	GLUI_Button* revive = addButton("Relembrar o jogo", reviveMode);
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl) {

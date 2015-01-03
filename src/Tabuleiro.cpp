@@ -1,21 +1,20 @@
 ﻿#include "CGFapplication.h"
 #include "Tabuleiro.h"
 
-Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(0, 3, 0, 3), jogador(true), dificuldade("EASY"), tipoDeJogo("PVP"), tempoInicial(CGFapplication::getTime()), tempoDecorrido(new int(0)), revive(false) {
+Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(0, 3, 0, 3), jogador(true), dificuldade("EASY"), tipoDeJogo("PVP"), tempoInicial(CGFapplication::getTime()), minutosDecorridos(new int(0)), segundosDecorridos(new int(0)), tempoJogada(new int(15)), revive(false) {
 	PecaTabuleiro::addTextura("../res/glass.jpg");
 	PecaTabuleiro::addTextura("../res/plastic.jpg");
 	//PecaTabuleiro::addTextura("../res/stone.jpg");
 	PecaTabuleiro::addTextura("../res/wood.jpg");
 	PecaTabuleiro::setTextura(2);
-	plogcon = Socket();
+	/*plogcon = Socket();
+	getchar(); // DEBUG
 	plogcon.socketConnect();
 	char *s = "comando(1, 2).\n";
 	plogcon.envia(s, strlen(s));
 	char ans[128];
 	plogcon.recebe(ans);
-	plogcon.quit();
-	getchar();
-	system("pause");
+	plogcon.quit();*/
 	resetTabuleiro();
 }
 
@@ -54,8 +53,16 @@ string Tabuleiro::getTipoDeJogo() const {
 	return this->tipoDeJogo;
 }
 
-int* Tabuleiro::getTempoDecorrido() const {
-	return tempoDecorrido;
+int* Tabuleiro::getMinutosDecorridos() const {
+	return minutosDecorridos;
+}
+
+int* Tabuleiro::getSegundosDecorridos() const {
+	return segundosDecorridos;
+}
+
+int* Tabuleiro::getTempoJogada() const {
+	return tempoJogada;
 }
 
 void Tabuleiro::setDificuldade(string dificuldade) {
@@ -326,7 +333,9 @@ void Tabuleiro::addClique(int clique) {
 }
 
 void Tabuleiro::atualizarPecas() {
-	*tempoDecorrido = (CGFapplication::getTime() - tempoInicial) / 1000; // Atualizar o tempo decorrido
+	int tempoDecorrido = (CGFapplication::getTime() - tempoInicial) / 1000; // Atualizar o tempo decorrido
+	*minutosDecorridos = tempoDecorrido / 60;
+	*segundosDecorridos = tempoDecorrido % 60;
 
 	int movimentos = cliques.size() / 4;
 
@@ -391,7 +400,7 @@ void Tabuleiro::undo(){
 		vector<int> coords = jogadas.top().cliques;
 		cout << "[" << coords[0] << "," << coords[1] << "] -> [" << coords[2] << ", " << coords[3] << "]" << endl;
 		PecaTabuleiro* pecaDefault = new PecaTabuleiro(getPecaFromCoords(coords[2], coords[3])->getX(), getPecaFromCoords(coords[2], coords[3])->getY());
-		
+
 		// NOVA PECA
 		PecaTabuleiro* pecaAMover = new PecaTabuleiro(getPecaFromCoords(coords[2], coords[3])->getX(), getPecaFromCoords(coords[2], coords[3])->getY(), getPecaFromCoords(coords[2], coords[3])->getEstrutura());
 		pecaAMover->setX(getPecaFromCoords(coords[2], coords[3])->getXinicial());
