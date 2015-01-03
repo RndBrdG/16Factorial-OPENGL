@@ -8,7 +8,7 @@
 #include <vector>
 #include <stack>
 
-#define VELOCIDADE 0.4
+#define VELOCIDADE 40 // 0.4
 
 using namespace std;
 

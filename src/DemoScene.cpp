@@ -8,7 +8,6 @@
 
 DemoScene::DemoScene(char* filename) : parser(XMLScene(filename)) {
 	ultimaAtualizacao = CGFapplication::getTime();
-	this->tabuleiro = Tabuleiro();
 }
 
 const Graph& DemoScene::getElementos() {
