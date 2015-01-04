@@ -111,6 +111,7 @@ TPinterface::TPinterface() {
 	gameMode = 40;
 	undoMode = 50;
 	reviveMode = 60;
+	glutReshapeWindow(800, 800);
 }
 
 void TPinterface::processKeyboard(unsigned char key, int x, int y) {
