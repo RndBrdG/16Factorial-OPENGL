@@ -382,17 +382,18 @@ void Tabuleiro::atualizarPecas() {
 				pecaDestino->getY() - pecaAMover->getY() >= VELOCIDADE ? pecaAMover->setY(pecaAMover->getY() + VELOCIDADE) : pecaAMover->setY(pecaAMover->getY() + (pecaDestino->getY() - pecaAMover->getY()));
 			else {
 				stringstream ss;
+				char ans[128];
+				if (!this->revive) {
 				ss << "verificarJogadaValida(" << toString() << "," << cliques[i * 4 + 2] << "," << cliques[i * 4 + 3] << "," << pecaAMover->toString() << ").\n";
 
 				plogcon.envia(const_cast<char*>(ss.str().c_str()), strlen(ss.str().c_str()));
-				char ans[128];
 				plogcon.recebe(ans);
 
 				jogador = !jogador;
 				pecaAMover->setAnimada(false);
 				tabuleiro[cliques[i * 4 + 2]][cliques[i * 4 + 3]] = pecaDestino;
 				*pecaDestino = *pecaAMover;
-
+				}
 				cout << "Peca escolhida: " << (cliques[i * 4 + 0] - 100) * 4 + cliques[i * 4 + 1] << endl;
 
 				if (!this->revive) {
@@ -408,6 +409,7 @@ void Tabuleiro::atualizarPecas() {
 					cout << "Ok" << endl;
 				}
 
+				if (!this->revive) {
 				string temp = string(ans);
 
 				if (temp[0] == '2')
