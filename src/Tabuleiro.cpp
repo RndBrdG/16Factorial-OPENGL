@@ -1,8 +1,10 @@
 #include "CGFapplication.h"
 #include <sstream>
+#include <time.h>
 #include "Tabuleiro.h"
 
 Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(0, 3, 0, 3), jogador(true), fimJogo(false), dificuldade("EASY"), tipoDeJogo("PVP"), tempoInicial(CGFapplication::getTime()), minutosDecorridos(new int(0)), segundosDecorridos(new int(0)), tempoJogada(new int(15)), revive(false) {
+	srand(time(NULL));
 	PecaTabuleiro::addTextura("../res/glass.jpg");
 	PecaTabuleiro::addTextura("../res/plastic.jpg");
 	//PecaTabuleiro::addTextura("../res/stone.jpg");
@@ -347,6 +349,7 @@ void Tabuleiro::addClique(int clique) {
 	if (clique == 104) {
 		if (fimJogo) {
 			setJogador(true);
+			clearJogadas();
 			resetTabuleiro();
 		}
 	}
@@ -382,7 +385,9 @@ void Tabuleiro::atualizarPecas() {
 				pecaDestino->getY() - pecaAMover->getY() >= VELOCIDADE ? pecaAMover->setY(pecaAMover->getY() + VELOCIDADE) : pecaAMover->setY(pecaAMover->getY() + (pecaDestino->getY() - pecaAMover->getY()));
 			else {
 				stringstream ss;
+				string temp;
 				char ans[128];
+				bool jogadaValida = true;
 				if (!this->revive) {
 				ss << "verificarJogadaValida(" << toString() << "," << cliques[i * 4 + 2] << "," << cliques[i * 4 + 3] << "," << pecaAMover->toString() << ").\n";
 
@@ -410,41 +415,72 @@ void Tabuleiro::atualizarPecas() {
 				}
 
 				if (!this->revive) {
-				string temp = string(ans);
+					temp = string(ans);
 
-				if (temp[0] == '2')
-					undo();
+					if (temp[0] == '2'){
+						undo();
+						jogadaValida = false;
+					}
 
-				ans[0] = '\0';
+					ans[0] = '\0';
 
-				int aux = 0;
-				string temp1 = "[";
-				for (int i = 0; i < 4; i++){
-					for (int j = 0; j < 4; j++){
-						if (!pecas_por_jogar[i][j]->getFixa() && !pecas_por_jogar[i][j]->getAnimada()){
-							if (aux != 0){
-								temp1.append(",");
+					int aux = 0;
+					string temp1 = "[";
+					for (int i = 0; i < 4; i++){
+						for (int j = 0; j < 4; j++){
+							if (!pecas_por_jogar[i][j]->getFixa() && !pecas_por_jogar[i][j]->getAnimada()){
+								if (aux != 0){
+									temp1.append(",");
+								}
+								temp1.append(pecas_por_jogar[i][j]->toString());
+								aux++;
 							}
-							temp1.append(pecas_por_jogar[i][j]->toString());
-							aux++;
 						}
 					}
+					temp1.append("]");
+
+					ss.str(string());
+
+					ss << "verificarFimJogo(" << toString() << "," << temp1 << ").\n";
+
+					plogcon.envia(const_cast<char*>(ss.str().c_str()), strlen(ss.str().c_str()));
+					plogcon.recebe(ans);
+
+					temp = string(ans);
+					if (temp[0] == '1')
+						fimJogo = true;
+					else if (!this->jogador && this->tipoDeJogo == "PVC"){
+						while (true){
+							int linha = rand() % 4;
+							int coluna = rand() % 4;
+							int padraoColuna = rand() % 4;
+							int padraoLinha = rand() % 4;
+							cout << "Linha: " << linha << "Coluna:" << coluna << "padraoColuna: " << padraoColuna << "padraoLinha:" << padraoLinha << endl;
+							if (!pecas_por_jogar[padraoLinha][padraoColuna]->getFixa() && !pecas_por_jogar[padraoLinha][padraoColuna]->getAnimada()){
+								ss << "verificarJogadaValida(" << toString() << "," << linha << "," << coluna << "," << pecas_por_jogar[padraoLinha][padraoColuna]->toString() << ").\n";
+								plogcon.envia(const_cast<char*>(ss.str().c_str()), strlen(ss.str().c_str()));
+								plogcon.recebe(ans);
+								temp = string(ans);
+								if (temp[0] != '2'){
+									pecaAMover = getPecaFromCoords(padraoLinha+100, padraoColuna);
+									pecaAMover->setAnimada(false);
+									pecaDestino = getPecaFromCoords(linha, coluna);
+									pecaDestino->setAnimada(false);
+									float x = pecaDestino->getX(), y = pecaDestino->getY();
+									*pecaDestino = *pecaAMover;
+									pecaDestino->setX(x); pecaDestino->setY(y);
+									pecaDestino->setFixa();
+									pecaAMover->setFixa();
+									cout << tabuleiro[linha][coluna]->toString() << endl;
+									jogador = !jogador;
+									break;
+								}
+								ans[0] = '\0';
+							}
+						}
+						cout << "saiu do while" << endl;
+					} // end else if
 				}
-				temp1.append("]");
-
-				ss.str(string());
-
-				ss << "verificarFimJogo(" << toString() << "," << temp1 << ").\n";
-
-				cout << temp1 << endl;
-
-				plogcon.envia(const_cast<char*>(ss.str().c_str()), strlen(ss.str().c_str()));
-				plogcon.recebe(ans);
-
-				temp = string(ans);
-				if (temp[0] == '1')
-					fimJogo = true;
-
 				vector<int> aux1(cliques.begin(), cliques.begin() + i * 4), aux2(cliques.begin() + i * 4 + 3 + 1, cliques.end());
 				aux1.insert(aux1.end(), aux2.begin(), aux2.end());
 				aux1.swap(cliques);
