@@ -366,7 +366,7 @@ void Tabuleiro::atualizarPecas() {
 
 	int movimentos = cliques.size() / 4;
 
-	if (movimentos == 0 && static_cast<int>(CGFapplication::getTime() - tempoInicialJogada) / 1000 >= *tempoJogada) {
+	if (movimentos == 0 && !fimJogo && static_cast<int>(CGFapplication::getTime() - tempoInicialJogada) / 1000 >= *tempoJogada) {
 		jogador = !jogador;
 		tempoInicialJogada = CGFapplication::getTime();
 	}
