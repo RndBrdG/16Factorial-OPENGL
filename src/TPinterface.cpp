@@ -155,7 +155,7 @@ void TPinterface::initGUI() {
 		textName << it->first;
 		addRadioButtonToGroup(radioTextures, const_cast<char*>(textName.str().c_str()));
 	}
-	texMode = 2;
+	texMode = 0;
 
 	addColumn();
 
@@ -168,7 +168,7 @@ void TPinterface::initGUI() {
 	}
 	addSeparator();
 	GLUI_Spinner* spinnerTempo = addSpinner("Segundos max. jogada", GLUI_SPINNER_INT, static_cast<DemoScene*>(scene)->getTabuleiro().getTempoJogada());
-	spinnerTempo->set_int_limits(0, 120);
+	spinnerTempo->set_int_limits(10, 120);
 	GLUI_StaticText* textoTempoDecorrido = addStaticText("Tempo decorrido:");
 	GLUI_EditText* textoMinutos = addEditText("Minutos", static_cast<int*>(static_cast<DemoScene*>(scene)->getTabuleiro().getMinutosDecorridos()));
 	GLUI_EditText* textoSegundos = addEditText("Segundos", static_cast<int*>(static_cast<DemoScene*>(scene)->getTabuleiro().getSegundosDecorridos()));
