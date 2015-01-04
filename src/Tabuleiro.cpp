@@ -461,7 +461,7 @@ void Tabuleiro::atualizarPecas() {
 
 					if (temp[0] == '1')
 						fimJogo = true;
-					else if (!this->jogador && this->tipoDeJogo == "PVC"){
+					else if (!this->jogador && this->tipoDeJogo == "PVC" && !this->revive){
 						while (true){
 							int linha = rand() % 4;
 							int coluna = rand() % 4;
@@ -474,6 +474,13 @@ void Tabuleiro::atualizarPecas() {
 								plogcon.recebe(ans);
 								temp = string(ans);
 								if (temp[0] != '2'){
+									Jogada a1;
+									a1.cliques = vector<int>();
+									a1.cliques.push_back(padraoLinha+100);
+									a1.cliques.push_back(padraoColuna);
+									a1.cliques.push_back(linha);
+									a1.cliques.push_back(coluna);
+									this->jogadas.push(a1);
 									pecaAMover = getPecaFromCoords(padraoLinha + 100, padraoColuna);
 									pecaAMover->setAnimada(false);
 									pecaDestino = getPecaFromCoords(linha, coluna);
@@ -492,8 +499,7 @@ void Tabuleiro::atualizarPecas() {
 								cout <<"----"<<  ans << endl;
 							}
 						}
-						cout << "saiu do while" << endl;
-					} // end else if
+					}
 				}
 
 				vector<int> aux1(cliques.begin(), cliques.begin() + i * 4), aux2(cliques.begin() + i * 4 + 3 + 1, cliques.end());
