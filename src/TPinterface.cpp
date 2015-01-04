@@ -92,12 +92,12 @@ void TPinterface::processHits(GLint hits, GLuint buffer[])
 	{
 		// this should be replaced by code handling the picked object's ID's (stored in "selected"), 
 		// possibly invoking a method on the scene class and passing "selected" and "nselected"
-		printf("Picked IDs: ");
+		printf("------\n ID DA PECA: ");
 		for (unsigned int i = 0; i < nselected; i++) {
 			static_cast<DemoScene*>(scene)->getTabuleiro().addClique(selected[i]);
 			printf("%d ", selected[i]);
 		}
-		printf("\n");
+		printf("\n------");
 	}
 	else
 		printf("Nothing selected while picking.\n");

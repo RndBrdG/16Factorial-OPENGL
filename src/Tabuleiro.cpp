@@ -5,6 +5,12 @@
 
 Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(0, 3, 0, 3), jogador(true), fimJogo(false), dificuldade("EASY"), tipoDeJogo("PVP"), tempoInicial(CGFapplication::getTime()), tempoInicialJogada(tempoInicial), minutosDecorridos(new int(0)), segundosDecorridos(new int(0)), tempoJogada(new int(30)), revive(false) {
 	srand(time(NULL));
+	system("CLS");
+	cout << "#####################################" << endl;
+	cout << "#                                   #" << endl;
+	cout << "#           16! Factorial           #" << endl;
+	cout << "#                                   #" << endl;
+	cout << "#####################################" << endl;
 	PecaTabuleiro::addTextura("../res/wood.jpg");
 	//PecaTabuleiro::addTextura("../res/stone.jpg");
 	PecaTabuleiro::addTextura("../res/plastic.jpg");
@@ -401,15 +407,13 @@ void Tabuleiro::atualizarPecas() {
 
 					plogcon.envia(const_cast<char*>(ss.str().c_str()), strlen(ss.str().c_str()));
 					plogcon.recebe(ans);
-
+				}
 					jogador = !jogador;
 					tempoInicialJogada = CGFapplication::getTime();
 					pecaAMover->setAnimada(false);
 					tabuleiro[cliques[i * 4 + 2]][cliques[i * 4 + 3]] = pecaDestino;
 					*pecaDestino = *pecaAMover;
-				}
-				cout << "Peca escolhida: " << (cliques[i * 4 + 0] - 100) * 4 + cliques[i * 4 + 1] << endl;
-
+				
 				if (!this->revive) {
 					Jogada a1;
 					a1.cliques = vector<int>();
@@ -496,7 +500,6 @@ void Tabuleiro::atualizarPecas() {
 								}
 								ans[0] = '\0';
 								ss.str(string());
-								cout <<"----"<<  ans << endl;
 							}
 						}
 					}
