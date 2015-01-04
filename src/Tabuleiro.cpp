@@ -2,12 +2,18 @@
 #include <sstream>
 #include "Tabuleiro.h"
 
-Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(0, 3, 0, 3), jogador(true), dificuldade("EASY"), tipoDeJogo("PVP"), tempoInicial(CGFapplication::getTime()), minutosDecorridos(new int(0)), segundosDecorridos(new int(0)), tempoJogada(new int(15)), revive(false) {
+Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(0, 3, 0, 3), jogador(true), fimJogo(false), dificuldade("EASY"), tipoDeJogo("PVP"), tempoInicial(CGFapplication::getTime()), minutosDecorridos(new int(0)), segundosDecorridos(new int(0)), tempoJogada(new int(15)), revive(false) {
 	PecaTabuleiro::addTextura("../res/glass.jpg");
 	PecaTabuleiro::addTextura("../res/plastic.jpg");
 	//PecaTabuleiro::addTextura("../res/stone.jpg");
 	PecaTabuleiro::addTextura("../res/wood.jpg");
 	PecaTabuleiro::setTextura(2);
+	addTexturaPlacar("../res/placar_jog1.jpg");
+	addTexturaPlacar("../res/placar_jog2.jpg");
+	addTexturaPlacar("../res/placar_cpu.jpg");
+	addTexturaPlacar("../res/placar_fim_jog1.jpg");
+	addTexturaPlacar("../res/placar_fim_jog2.jpg");
+	addTexturaPlacar("../res/placar_fim_cpu.jpg");
 	if (!plogcon.socketConnect()){
 		cout << "Prolog server is required. Exiting" << endl;
 		system("pause");
@@ -123,16 +129,22 @@ void Tabuleiro::drawPecas() {
 }
 
 void Tabuleiro::drawPlacar() {
-	CGFtexture texturaPlacar = jogador ? ("../res/placar_jog1.jpg") : (tipoDeJogo == "PVP" ? ("../res/placar_jog2.jpg") : ("../res/placar_cpu.jpg"));
-	texturaPlacar.apply();
+	CGFtexture* texturaPlacar;
+	if (!fimJogo)
+		texturaPlacar = texturasPlacar[jogador ? 0 : tipoDeJogo == "PVP" ? 1 : 2];
+	else texturaPlacar = texturasPlacar[jogador ? 4 : tipoDeJogo == "PVP" ? 3 : 5];
+	texturaPlacar->apply();
 
 	glPushMatrix();
 	glTranslatef(0, 4 * 4, 0);
+	glPushName(104);
 	placar.draw(12, 6);
+	glPopName();
 	glPopMatrix();
 }
 
 void Tabuleiro::resetTabuleiro(){
+	fimJogo = false;
 	float x = 0, y = 4 * 3;
 
 	// Clear all the board
@@ -327,8 +339,18 @@ void Tabuleiro::resetTabuleiro(){
 
 }
 
+void Tabuleiro::addTexturaPlacar(string textura) {
+	texturasPlacar.push_back(new CGFtexture(textura));
+}
+
 void Tabuleiro::addClique(int clique) {
-	cliques.push_back(clique);
+	if (clique == 104) {
+		if (fimJogo) {
+			setJogador(true);
+			resetTabuleiro();
+		}
+	}
+	else cliques.push_back(clique);
 }
 
 void Tabuleiro::atualizarPecas() {
@@ -342,7 +364,7 @@ void Tabuleiro::atualizarPecas() {
 		PecaTabuleiro* pecaAMover = getPecaFromCoords(cliques[i * 4 + 0], cliques[i * 4 + 1]);
 		PecaTabuleiro* pecaDestino = getPecaFromCoords(cliques[i * 4 + 2], cliques[i * 4 + 3]);
 
-		if (cliques[i * 4 + 0] >= 100 && cliques[i * 4 + 2] == 105)
+		if (cliques[i * 4 + 0] >= 100 && cliques[i * 4 + 0] <= 103 && cliques[i * 4 + 2] == 105)
 			pecaAMover->rodar();
 
 		if (cliques[i * 4 + 0] >= 100 && cliques[i * 4 + 0] != 105 && cliques[i * 4 + 2] < 100 && (pecaAMover->getAnimada() || (!pecaAMover->getFixa() && !pecaDestino->getFixa()))) {
@@ -418,10 +440,8 @@ void Tabuleiro::atualizarPecas() {
 				plogcon.recebe(ans);
 
 				temp = string(ans);
-				if (temp[0] == '1'){
-					setJogador(true);
-					resetTabuleiro();
-				}
+				if (temp[0] == '1')
+					fimJogo = true;
 
 				vector<int> aux1(cliques.begin(), cliques.begin() + i * 4), aux2(cliques.begin() + i * 4 + 3 + 1, cliques.end());
 				aux1.insert(aux1.end(), aux2.begin(), aux2.end());

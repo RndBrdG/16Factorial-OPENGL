@@ -25,7 +25,9 @@ private:
 	Rect pecaRodar;
 	stack<Jogada> jogadas;
 	vector<int> cliques;
+	vector<CGFtexture*> texturasPlacar;
 	bool jogador; // true = 1, false = 2
+	bool fimJogo;
 	string dificuldade;
 	string tipoDeJogo; // PVP - PLAYER VS PLAYER || PVC - PLAYER VS COMPUTER
 	unsigned long tempoInicial;
@@ -41,7 +43,6 @@ public:
 	PecaTabuleiro* getPecaFromCoords(int, int);
 	stack<Jogada> &getJogadas();
 	const vector<int> getCliques();
-	const float &getRotateAngle() const;
 	bool getJogador() const;
 	bool getRevive() const;
 
@@ -58,6 +59,7 @@ public:
 	void drawPecas();
 	void drawPlacar();
 	void atualizarPecas();
+	void addTexturaPlacar(string textura);
 	void addClique(int clique);
 	void resetTabuleiro();
 	void undo();
