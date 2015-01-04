@@ -3,7 +3,7 @@
 #include <time.h>
 #include "Tabuleiro.h"
 
-Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(0, 3, 0, 3), jogador(true), fimJogo(false), dificuldade("EASY"), tipoDeJogo("PVP"), tempoInicial(CGFapplication::getTime()), tempoInicialJogada(tempoInicial), minutosDecorridos(new int(0)), segundosDecorridos(new int(0)), tempoJogada(new int(30)), revive(false) {
+Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(0, 3, 0, 3), jogador(true), fimJogo(false), dificuldade("EASY"), tipoDeJogo("PVP"), minutosDecorridos(new int(0)), segundosDecorridos(new int(0)), tempoJogada(new int(30)), revive(false) {
 	srand(time(NULL));
 	system("CLS");
 	cout << "#####################################" << endl;
@@ -156,6 +156,8 @@ void Tabuleiro::drawPlacar() {
 
 void Tabuleiro::resetTabuleiro(){
 	fimJogo = false;
+	tempoInicialJogada = CGFapplication::getTime();
+	tempoInicial = CGFapplication::getTime();
 	float x = 0, y = 4 * 3;
 
 	// Clear all the board
@@ -372,7 +374,7 @@ void Tabuleiro::atualizarPecas() {
 
 	int movimentos = cliques.size() / 4;
 
-	if (movimentos == 0 && !fimJogo && static_cast<int>(CGFapplication::getTime() - tempoInicialJogada) / 1000 >= *tempoJogada) {
+	if (tipoDeJogo == "PVP" && movimentos == 0 && !fimJogo && static_cast<int>(CGFapplication::getTime() - tempoInicialJogada) / 1000 >= *tempoJogada) {
 		jogador = !jogador;
 		tempoInicialJogada = CGFapplication::getTime();
 	}

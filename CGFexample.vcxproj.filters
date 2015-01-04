@@ -184,15 +184,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\scene.anf">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\shader.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="res\shader.frag">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="res\scene_tab.anf">
       <Filter>Resource Files</Filter>
     </None>

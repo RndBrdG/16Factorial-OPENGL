@@ -129,12 +129,7 @@
     <None Include="res\placar_jog2.jpg" />
     <None Include="res\plastic.jpg" />
     <None Include="res\rodar.jpg" />
-    <None Include="res\scene.anf">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="res\scene_tab.anf" />
-    <None Include="res\shader.frag" />
-    <None Include="res\shader.vert" />
     <None Include="res\socket.pl" />
     <None Include="res\stone.jpg" />
     <None Include="res\wood.jpg" />
