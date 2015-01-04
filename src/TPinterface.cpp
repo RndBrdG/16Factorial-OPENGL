@@ -184,6 +184,7 @@ void TPinterface::initGUI() {
 	GLUI_Listbox *tipoJogo = addListbox("Tipo de jogo", &gameMode, 40);
 	tipoJogo->add_item(41, "PVP");
 	tipoJogo->add_item(42, "PVC");
+	tipoJogo->add_item(43, "CVC");
 	tipoJogo->set_int_val(41);
 	addSeparator();
 	GLUI_Button* undo = addButton("Anular", undoMode);

@@ -17,10 +17,10 @@
   <cameras initial="0 graus">
     <!-- tem de existir, pelo menos uma camara dos tipos seguintes (perspective ou ortho) -->
     <!-- no caso da camara ortho, o atributo "direction" define o eixo segundo o qual se efetua a projecao -->
-    <perspective id="0 graus" near="0.2" far="1" angle="0" pos="6 14 35" target="6 14 0" />
-    <perspective id="90 graus" near="0.2" far="1" angle="90" pos="6 14 35" target="6 14 0" />
-    <perspective id="180 graus" near="0.2" far="1" angle="180" pos="6 14 35" target="6 14 0" />
-    <perspective id="270 graus" near="0.2" far="1" angle="270" pos="6 14 35" target="6 14 0" />
+    <perspective id="0 graus" near="0.2" far="1" angle="0" pos="6 14 32.5" target="6 14 0" />
+    <perspective id="90 graus" near="0.2" far="1" angle="90" pos="6 14 32" target="6 14 0" />
+    <perspective id="180 graus" near="0.2" far="1" angle="180" pos="6 14 31" target="6 14 0" />
+    <perspective id="270 graus" near="0.2" far="1" angle="270" pos="6 14 34" target="6 14 0" />
   </cameras>
   <animations>
   </animations>
