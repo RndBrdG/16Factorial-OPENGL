@@ -31,6 +31,7 @@ private:
 	string dificuldade;
 	string tipoDeJogo; // PVP - PLAYER VS PLAYER || PVC - PLAYER VS COMPUTER
 	unsigned long tempoInicial;
+	unsigned long tempoInicialJogada;
 	int* minutosDecorridos;
 	int* segundosDecorridos;
 	int* tempoJogada;
