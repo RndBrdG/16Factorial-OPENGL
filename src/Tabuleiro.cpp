@@ -25,6 +25,9 @@ Tabuleiro::Tabuleiro() : cliques(vector<int>()), placar(0, 12, 0, 6), pecaRodar(
 	resetTabuleiro();
 }
 
+Socket& Tabuleiro::getSocket() {
+	return plogcon;
+}
 
 const vector<vector<PecaTabuleiro*>>& Tabuleiro::getTabuleiro() const {
 	return this->tabuleiro;

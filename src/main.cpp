@@ -24,7 +24,6 @@ int main(int argc, char* argv[]) {
 
 			app.setScene(new DemoScene("../res/scene_tab.anf"));
 			app.setInterface(new TPinterface());
-			//app.setInterface(new PickInterface());
 
 			app.run();
 	}

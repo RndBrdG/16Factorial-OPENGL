@@ -190,6 +190,8 @@ void TPinterface::initGUI() {
 	GLUI_Button* undo = addButton("Anular", undoMode);
 	addSeparator();
 	GLUI_Button* revive = addButton("Relembrar o jogo", reviveMode);
+	addSeparator();
+	GLUI_Button* close = addButton("Sair", 70);
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl) {
@@ -239,8 +241,9 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 			static_cast<DemoScene*>(scene)->backup = static_cast<DemoScene*>(scene)->tabuleiro.getJogadas();
 		}
 		else cout << "You need to play atleast once." << endl;
-
-
 		break;
+	case 70:
+		static_cast<DemoScene*>(scene)->tabuleiro.getSocket().quit();
+		exit(0);
 	}
 }

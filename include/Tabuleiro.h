@@ -39,6 +39,7 @@ private:
 public:
 	Tabuleiro();
 
+	Socket& getSocket();
 	const vector<vector<PecaTabuleiro*>>& getTabuleiro() const;
 	const vector<vector<PecaTabuleiro*>>& getPecas() const;
 	PecaTabuleiro* getPecaFromCoords(int, int);
