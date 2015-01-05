@@ -368,9 +368,11 @@ void Tabuleiro::addClique(int clique) {
 }
 
 void Tabuleiro::atualizarPecas() {
-	int tempoDecorrido = (CGFapplication::getTime() - tempoInicial) / 1000; // Atualizar o tempo decorrido
-	*minutosDecorridos = tempoDecorrido / 60;
-	*segundosDecorridos = tempoDecorrido % 60;
+	if (!fimJogo) {
+		int tempoDecorrido = (CGFapplication::getTime() - tempoInicial) / 1000; // Atualizar o tempo decorrido
+		*minutosDecorridos = tempoDecorrido / 60;
+		*segundosDecorridos = tempoDecorrido % 60;
+	}
 
 	int movimentos = cliques.size() / 4;
 
